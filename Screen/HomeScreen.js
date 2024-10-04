@@ -1,10 +1,10 @@
 import { SafeAreaView, StyleSheet } from 'react-native';
 
-import Margin from '../Home/src/Margin';
-import Search from '../Home/src/Search';
-import UserPlantList from '../Home/src/UserPlantList';
-import FooterBar from '../Home/src/FooterBar';
-import Header from '../Home/src/Header';
+import Margin from '../src/Margin';
+import Search from '../src/Search';
+import UserPlantList from '../src/UserPlantList';
+import FooterBar from '../src/FooterBar';
+import Header from '../src/Header';
 
 const HomeScreen = () => {
   return (
