@@ -1,11 +1,14 @@
 import React from 'react';
-import { View, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Shadow } from 'react-native-shadow-2';
 
-const UserPlant = () => {
+const UserPlant = (props) => {
+  const goToMonitor = (e) => {
+    props.navigation.navigate('Monitor');
+  };
   return (
     <View>
-      <View style={styles.boxStyle}>
+      <TouchableOpacity onPress={goToMonitor} style={styles.boxStyle}>
         <Shadow
           distance={6} // 그림자 거리 설정
           startColor={'#00000020'} // 그림자 색상
@@ -18,7 +21,7 @@ const UserPlant = () => {
             style={styles.imageStyle}
           />
         </Shadow>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };

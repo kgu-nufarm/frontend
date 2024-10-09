@@ -4,6 +4,7 @@ import Margin from '../src/Margin';
 import MonitorDate from '../src/MonitorDate';
 import MonitorCamera from '../src/MonitorCamera';
 import StatsDetail from '../src/StatsDetail';
+import StatsDate from '../src/StatsDate';
 
 const StatsServiceScreen = () => {
   return (
@@ -16,6 +17,7 @@ const StatsServiceScreen = () => {
       <Margin height={20} />
       <StatsDetail />
       <Margin height={20} />
+      {/* <StatsDate /> */}
     </SafeAreaView>
   );
 };

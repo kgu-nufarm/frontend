@@ -6,15 +6,15 @@ import UserPlantList from '../src/UserPlantList';
 import FooterBar from '../src/FooterBar';
 import Header from '../src/Header';
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation, route }) => {
   return (
     <SafeAreaView style={styles.container}>
-      <Margin height={40} />
-      <Header />
+      {/* <Margin height={40} /> */}
+      {/* <Header /> */}
       <Margin height={5} />
       <Search />
       <Margin height={20} />
-      <UserPlantList />
+      <UserPlantList navigation={navigation} />
       <Margin height={20} />
       <FooterBar />
     </SafeAreaView>

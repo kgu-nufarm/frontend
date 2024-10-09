@@ -3,14 +3,23 @@ import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import HomeScreen from './Screen/HomeScreen';
 import MonitoringScreen from './Screen/MonitoringScreen';
 import StatsServiceScreen from './Screen/StatsServiceScreen';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import StackNavigation from './routers/StackNavigation';
+import TabNavigation from './routers/TabNavigation';
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.container}>
-      {/* <HomeScreen /> */}
-      {/* <MonitoringScreen /> */}
-      <StatsServiceScreen />
-    </SafeAreaView>
+    // <SafeAreaView style={styles.container}>
+    <>
+      <NavigationContainer>
+        <StackNavigation />
+      </NavigationContainer>
+    </>
+    /* <HomeScreen /> */
+    /* <MonitoringScreen /> */
+    /* <StatsServiceScreen /> */
+    /* </SafeAreaView> */
   );
 }
 

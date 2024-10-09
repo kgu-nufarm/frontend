@@ -4,14 +4,10 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import UserPlant from './UserPlant';
 
-const UserPlantList = () => {
+const UserPlantList = (props) => {
   return (
     <ScrollView>
-      <UserPlant />
-      <UserPlant />
-      <UserPlant />
-      <UserPlant />
-      <UserPlant />
+      <UserPlant navigation={props.navigation} />
     </ScrollView>
   );
 };
