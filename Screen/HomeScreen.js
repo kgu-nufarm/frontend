@@ -9,8 +9,8 @@ import Header from '../src/Header';
 const HomeScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
-      {/* <Margin height={40} /> */}
-      {/* <Header /> */}
+      {/* <Margin height={40} />
+      <Header /> */}
       <Margin height={5} />
       <Search />
       <Margin height={20} />

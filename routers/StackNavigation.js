@@ -19,6 +19,9 @@ const StackNavigation = () => {
         component={MainTabNavigation}
         options={{
           headerTitleAlign: 'center',
+          headerStyle: {
+            height: 100, // 헤더 높이를 원하는 값으로 조정
+          },
           headerLeft: () => (
             <View>
               <MaterialCommunityIcons name="bell-outline" size={25} color="#269B00" style={{ marginLeft: 15 }} />

@@ -7,7 +7,7 @@ const MainTabStack = createBottomTabNavigator();
 
 const MainTabNavigation = () => {
   return (
-    <MainTabStack.Navigator>
+    <MainTabStack.Navigator screenOptions={({ route }) => ({ headerShown: false })}>
       <MainTabStack.Screen name="MainHome" component={HomeScreen} />
       <MainTabStack.Screen name="Store" component={StoreScreen} />
       <MainTabStack.Screen name="MyPage" component={MyPageScreen} />
