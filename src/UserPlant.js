@@ -9,19 +9,18 @@ const UserPlant = (props) => {
   return (
     <View>
       <TouchableOpacity onPress={goToMonitor} style={styles.boxStyle}>
-        <Shadow
-          distance={6} // 그림자 거리 설정
-          startColor={'#00000020'} // 그림자 색상
-          offset={[0, 7]} // 그림자 오프셋 (x, y)
-          radius={10} // 그림자 반경 설정
-          containerViewStyle={styles.imageContainer}
-        >
-          <Image
-            source={{ uri: 'https://cityfarmer.seoul.go.kr/fileManager/www/brd/6261/1617605980762.jpg' }}
-            style={styles.imageStyle}
-          />
-        </Shadow>
+        <Image
+          source={{ uri: 'https://cityfarmer.seoul.go.kr/fileManager/www/brd/6261/1617605980762.jpg' }}
+          style={styles.imageStyle}
+        />
       </TouchableOpacity>
+      <Shadow
+        distance={10} // 그림자 거리 설정
+        startColor={'#00000020'} // 그림자 색상
+        offset={[0, 10]} // 그림자 오프셋 (x, y)
+        radius={10} // 그림자 반경 설정
+        containerViewStyle={styles.imageContainer}
+      ></Shadow>
     </View>
   );
 };
@@ -36,7 +35,8 @@ const styles = StyleSheet.create({
   imageStyle: {
     width: 370,
     height: 150,
-    borderRadius: 15,
+    borderTopLeftRadius: 15, // 왼쪽 위 모서리 둥글게
+    borderTopRightRadius: 15, // 오른쪽 위 모서리 둥글게
   },
 });
 export default UserPlant;
