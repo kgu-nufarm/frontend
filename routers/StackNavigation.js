@@ -7,6 +7,7 @@ import { Text, View, Dimensions, SafeAreaView } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TabNavigation from './TabNavigation';
 import GrowthDeatil from '../src/GrowthDetail';
+import MainTabNavigation from './MainTabNavigation';
 
 const Stack = createStackNavigator();
 
@@ -15,7 +16,7 @@ const StackNavigation = () => {
     <Stack.Navigator>
       <Stack.Screen
         name="Home"
-        component={HomeScreen}
+        component={MainTabNavigation}
         options={{
           headerTitleAlign: 'center',
           headerLeft: () => (
