@@ -5,7 +5,7 @@ import GrowthManagement from './GrowthManagement';
 import AnomalyDectection from './AnomalyDectection';
 import { useState } from 'react';
 
-const MonitorDetail = () => {
+const MonitorDetail = (props) => {
   const [sensor, setSensor] = useState(1);
   const [growth, setGrowth] = useState(0);
   const [anomaly, setAnomaly] = useState(0);
@@ -54,7 +54,7 @@ const MonitorDetail = () => {
       </View>
       <Margin height={5} />
       {sensor == 1 ? <SensorTable /> : null}
-      {growth == 1 ? <GrowthManagement /> : null}
+      {growth == 1 ? <GrowthManagement navigation={props.navigation} /> : null}
       {anomaly == 1 ? <AnomalyDectection /> : null}
       {/* <SensorTable /> */}
       {/* <GrowthManagement /> */}

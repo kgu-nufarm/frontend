@@ -1,9 +1,12 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
-const GrowthManagement = () => {
+const GrowthManagement = (props) => {
+  const goToMonitor = (e) => {
+    props.navigation.navigate('Growth_Detail');
+  };
   return (
     <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-      <View style={styles.box_style}></View>
+      <TouchableOpacity style={styles.box_style} onPress={goToMonitor}></TouchableOpacity>
       <View style={styles.box_style}></View>
       <View style={styles.box_style}></View>
     </View>

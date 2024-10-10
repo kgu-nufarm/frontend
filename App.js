@@ -11,17 +11,17 @@ import GrowthDeatil from './src/GrowthDetail';
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.container}>
-      <>
-        {/* <NavigationContainer>
+    // <SafeAreaView style={styles.container}>
+    <>
+      <NavigationContainer>
         <StackNavigation />
-      </NavigationContainer> */}
-        <GrowthDeatil />
-      </>
-      {/* <HomeScreen />
-    <MonitoringScreen />
-    /* <StatsServiceScreen /> */}
-    </SafeAreaView>
+      </NavigationContainer>
+      {/* <GrowthDeatil /> */}
+    </>
+    //   {/* <HomeScreen />
+    // <MonitoringScreen />
+    // <StatsServiceScreen />
+    // </SafeAreaView> */}
   );
 }
 

@@ -6,6 +6,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { Text, View, Dimensions, SafeAreaView } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TabNavigation from './TabNavigation';
+import GrowthDeatil from '../src/GrowthDetail';
 
 const Stack = createStackNavigator();
 
@@ -66,6 +67,7 @@ const StackNavigation = () => {
           ),
         })}
       />
+      <Stack.Screen name="Growth_Detail" component={GrowthDeatil} />
     </Stack.Navigator>
   );
 };

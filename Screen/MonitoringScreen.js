@@ -5,7 +5,7 @@ import MonitorDate from '../src/MonitorDate';
 import MonitorCamera from '../src/MonitorCamera';
 import MonitorDetail from '../src/MonitorDetail';
 
-const MonitoringScreen = () => {
+const MonitoringScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       {/* <MonitorHeader /> */}
@@ -14,7 +14,7 @@ const MonitoringScreen = () => {
       <Margin height={20} />
       <MonitorCamera />
       <Margin height={20} />
-      <MonitorDetail />
+      <MonitorDetail navigation={navigation} />
       <Margin height={20} />
       {/* <SensorTable />
       <Margin height={20} />
