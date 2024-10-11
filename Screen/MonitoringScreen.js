@@ -8,8 +8,8 @@ import MonitorDetail from '../src/MonitorDetail';
 const MonitoringScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
-      {/* <MonitorHeader /> */}
-      {/* <Margin height={15} /> */}
+      {/* <MonitorHeader />
+      <Margin height={15} /> */}
       <MonitorDate />
       <Margin height={20} />
       <MonitorCamera />

@@ -9,8 +9,8 @@ import StatsDate from '../src/StatsDate';
 const StatsServiceScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
-      {/* <MonitorHeader /> */}
-      {/* <Margin height={15} /> */}
+      {/* <MonitorHeader />
+      <Margin height={15} /> */}
       <MonitorDate />
       <Margin height={20} />
       <MonitorCamera />
