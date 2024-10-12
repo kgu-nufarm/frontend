@@ -1,10 +1,13 @@
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, SafeAreaView } from 'react-native';
 import MonitorDate from './MonitorDate';
 import Margin from './Margin';
+import MonitorHeader from './MonitorHeader';
+import GrowthHeader from './GrowthHeader';
 
-const GrowthDeatil = () => {
+const GrowthDeatil = ({ navigation }) => {
   return (
-    <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+    <SafeAreaView style={styles.container}>
+      <GrowthHeader navigation={navigation} />
       <MonitorDate />
       <Margin height={20} />
       <View style={styles.box_header_style}>
@@ -18,11 +21,18 @@ const GrowthDeatil = () => {
         </Text>
         <Text>완전히 성장하기까지는 3~5주의 시간이 더 필요합니다!</Text>
       </View>
-    </View>
+      <Margin height={550} />
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   box_header_style: {
     height: 50, // 높이 설정
     borderRadius: 10, // 테두리 둥글기

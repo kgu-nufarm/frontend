@@ -6,11 +6,11 @@ import MonitorCamera from '../src/MonitorCamera';
 import StatsDetail from '../src/StatsDetail';
 import StatsDate from '../src/StatsDate';
 
-const StatsServiceScreen = () => {
+const StatsServiceScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
-      {/* <MonitorHeader />
-      <Margin height={15} /> */}
+      <MonitorHeader navigation={navigation} />
+      <Margin height={15} />
       <MonitorDate />
       <Margin height={20} />
       <MonitorCamera />

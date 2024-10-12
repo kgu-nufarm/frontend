@@ -53,9 +53,24 @@ const MonitorDetail = (props) => {
         </TouchableOpacity>
       </View>
       <Margin height={5} />
-      {sensor == 1 ? <SensorTable /> : null}
-      {growth == 1 ? <GrowthManagement navigation={props.navigation} /> : null}
-      {anomaly == 1 ? <AnomalyDectection /> : null}
+      {sensor == 1 ? (
+        <View>
+          <SensorTable />
+          <Margin height={100} />
+        </View>
+      ) : null}
+      {growth == 1 ? (
+        <View>
+          <GrowthManagement navigation={props.navigation} />
+          <Margin height={193.5} />
+        </View>
+      ) : null}
+      {anomaly == 1 ? (
+        <View>
+          <AnomalyDectection />
+          <Margin height={273.5} />
+        </View>
+      ) : null}
       {/* <SensorTable /> */}
       {/* <GrowthManagement /> */}
       {/* <AnomalyDectection /> */}

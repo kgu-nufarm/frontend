@@ -1,9 +1,19 @@
-import { Text, View } from 'react-native';
+import { Text, View, StyleSheet, Modal, Pressable, useNavigation } from 'react-native';
+import AntDesign from '@expo/vector-icons/AntDesign';
 
-const AlarmModal = () => {
+const AlarmModal = (props) => {
   return (
-    <View style={styles.container}>
-      <Text>건우</Text>
+    <View>
+      <Modal animationType="slide" visible={props.modal} transparent={true}>
+        <View style={styles.modalView}>
+          <Pressable>
+            <Text style={styles.modalTextStyle}>상추 물주기를 완료했어요. (클릭 아이콘)</Text>
+          </Pressable>
+        </View>
+        <Pressable style={{ alignItems: 'center' }} onPress={props.onPressModalClose}>
+          <AntDesign name="closecircle" size={24} color="#269B00" />
+        </Pressable>
+      </Modal>
     </View>
   );
 };

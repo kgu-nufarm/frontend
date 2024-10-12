@@ -11,6 +11,7 @@ import GrowthDeatil from '../src/GrowthDetail';
 import MainTabNavigation from './MainTabNavigation';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import AntDesign from '@expo/vector-icons/AntDesign';
+import AlarmModal from '../src/AlarmModal';
 
 const Stack = createStackNavigator();
 
@@ -26,81 +27,9 @@ const StackNavigation = () => {
     setModal(false);
   };
   return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="Home"
-        component={MainTabNavigation}
-        options={{
-          headerTitleAlign: 'center',
-          headerStyle: {
-            height: 100, // 헤더 높이를 원하는 값으로 조정
-          },
-          headerLeft: () => (
-            <View>
-              <View>
-                <Pressable onPress={onPressModalOpen}>
-                  <MaterialCommunityIcons name="bell-outline" size={25} color="#269B00" style={{ marginLeft: 15 }} />
-                </Pressable>
-              </View>
-
-              <View>
-                <Modal animationType="slide" visible={modal} transparent={true}>
-                  <View style={styles.modalView}>
-                    <Pressable>
-                      <Text style={styles.modalTextStyle}>상추 물주기를 완료했어요.</Text>
-                    </Pressable>
-                  </View>
-                  <Pressable style={{ alignItems: 'center' }} onPress={onPressModalClose}>
-                    <AntDesign name="closecircle" size={24} color="#269B00" />
-                  </Pressable>
-                </Modal>
-              </View>
-            </View>
-          ),
-          headerTitle: () => (
-            <View>
-              <Text style={{ fontSize: 26, fontWeight: 'bold', color: '#269B00' }}>nufarm</Text>
-            </View>
-          ),
-          headerRight: () => (
-            <View>
-              <Ionicons
-                name="reorder-three-outline"
-                size={25}
-                color="#269B00"
-                style={{ marginTop: 5, marginRight: 15 }}
-              />
-            </View>
-          ),
-        }}
-      />
-      <Stack.Screen
-        name="Monitor"
-        component={TabNavigation}
-        options={({ navigation }) => ({
-          headerLeft: () => (
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Ionicons
-                name="arrow-back-outline"
-                size={25}
-                color="#269B00"
-                style={{ marginLeft: 15 }}
-                onPress={() => navigation.goBack()} // 뒤로가기 동작
-              />
-            </View>
-          ),
-          headerRight: () => (
-            <View>
-              <Ionicons
-                name="reorder-three-outline"
-                size={25}
-                color="#269B00"
-                style={{ marginTop: 5, marginRight: 20 }}
-              />
-            </View>
-          ),
-        })}
-      />
+    <Stack.Navigator screenOptions={({ route }) => ({ headerShown: false })}>
+      <Stack.Screen name="Home" component={MainTabNavigation} />
+      <Stack.Screen name="Monitor" component={TabNavigation} />
       <Stack.Screen name="Growth_Detail" component={GrowthDeatil} />
     </Stack.Navigator>
   );
