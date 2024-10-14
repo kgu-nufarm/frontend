@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, Dimensions, SafeAreaView, Modal, Pressable, StyleSheet } from 'react-native';
+import { Text, View, Dimensions, SafeAreaView, Modal, Pressable, StyleSheet, ScrollView } from 'react-native';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import AntDesign from '@expo/vector-icons/AntDesign';
 
 const Header = (props) => {
-  const [modal, setModal] = useState(true);
+  const [modal, setModal] = useState(false);
 
   const goToMonitor = (e) => {
     props.navigation.navigate('Monitor');
@@ -38,22 +38,26 @@ const Header = (props) => {
       </View>
       <View>
         <Modal animationType="slide" visible={modal} transparent={true}>
-          <View style={styles.modalView}>
-            <Pressable
-              onPress={() => {
-                goToMonitor();
-                onPressModalClose();
-              }}
-            >
-              <Text style={styles.modalTextStyle}>상추 물주기를 완료했어요.</Text>
-              <Text> (팝업 누르면 모니터링 화면으로 이동)</Text>
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Pressable
+                onPress={() => {
+                  goToMonitor();
+                  onPressModalClose();
+                }}
+              >
+                <Text style={styles.modalTextStyle}>상추 물주기를 완료했어요.</Text>
+                <Text> (팝업 누르면 모니터링 화면으로 이동)</Text>
+              </Pressable>
+            </View>
+
+            <Pressable style={{ alignItems: 'center' }} onPress={onPressModalClose}>
+              <AntDesign name="closecircle" size={24} color="#269B00" />
             </Pressable>
           </View>
-          <Pressable style={{ alignItems: 'center' }} onPress={onPressModalClose}>
-            <AntDesign name="closecircle" size={24} color="#269B00" />
-          </Pressable>
         </Modal>
       </View>
+
       <Text
         style={{
           fontSize: 26,
@@ -63,6 +67,7 @@ const Header = (props) => {
           alignItems: 'center',
           textAlign: 'center',
           flex: 1,
+          // marginRight: 100,
         }}
       >
         nufarm
@@ -102,6 +107,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 50,
+  },
+  centeredView: {
+    flex: 1,
+    alignContent: 'center',
+    textAlignVertical: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.8)',
   },
 });
 export default Header;

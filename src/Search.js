@@ -37,4 +37,5 @@ const styles = StyleSheet.create({
     width: '88%', // 너비 설정 (80%의 부모 컨테이너 크기를 기준으로)
   },
 });
+
 export default Search;

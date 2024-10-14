@@ -1,6 +1,35 @@
 import { StyleSheet, Text, View } from 'react-native';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const SensorTable = () => {
+  const [temp, setTemp] = useState('');
+  const [humidity, setHumidity] = useState('');
+  const [illuminance, setIlluminance] = useState('');
+  const [soilMoisture, setSoilMoisture] = useState('');
+  const [co2, setCo2] = useState('');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://192.168.137.96:5000/sensor'); // 라즈베리파이의 IP 및 엔드포인트에 맞게 수정
+        const data = response.data;
+        setTemp(data.temp);
+        setHumidity(data.humidity);
+        setIlluminance(data.illuminance);
+        setSoilMoisture(data.soil_moisture);
+        setCo2(data.co2);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData(); // 초기 데이터 로드
+
+    // const intervalId = setInterval(fetchData, 200); // 0.2초마다 데이터 갱신
+
+    // return () => clearInterval(intervalId); // 컴포넌트 언마운트 시 interval 정리
+  }, []);
   return (
     <View style={styles.wrapper}>
       {/* Table container */}
@@ -22,7 +51,7 @@ const SensorTable = () => {
           </View>
 
           <View style={styles.text_style}>
-            <Text>19</Text>
+            <Text>{temp}</Text>
           </View>
         </View>
 
@@ -42,7 +71,7 @@ const SensorTable = () => {
           </View>
 
           <View style={styles.text_style}>
-            <Text>85</Text>
+            <Text>{humidity}</Text>
           </View>
         </View>
 
@@ -62,7 +91,7 @@ const SensorTable = () => {
           </View>
 
           <View style={styles.text_style}>
-            <Text>3023</Text>
+            <Text>{illuminance}</Text>
           </View>
         </View>
 
