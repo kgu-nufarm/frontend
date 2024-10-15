@@ -3,6 +3,7 @@ import { View, Text } from 'react-native';
 import { Button } from 'react-native-paper';
 import { DatePickerModal, registerTranslation, en } from 'react-native-paper-dates';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import Entypo from '@expo/vector-icons/Entypo';
 
 registerTranslation('en', en);
 
@@ -46,9 +47,12 @@ const StoreScreen = () => {
     <SafeAreaProvider>
       <View style={{ justifyContent: 'center', flex: 1, alignItems: 'center' }}>
         <Button onPress={() => setOpen(true)} uppercase={false}>
-          {currentDateTime}
-          <Text> 날짜를 선택하세요</Text>
+          <Text>
+            {currentDateTime}
+            <Entypo name="triangle-down" size={24} color="black" />
+          </Text>
         </Button>
+
         <DatePickerModal
           locale="en"
           mode="single"
@@ -57,8 +61,6 @@ const StoreScreen = () => {
           date={date}
           onConfirm={onConfirmSingle}
         />
-        {/* 선택한 날짜 표시 */}
-        {userDate && <Text>선택한 날짜: {userDate}</Text>}
       </View>
     </SafeAreaProvider>
   );

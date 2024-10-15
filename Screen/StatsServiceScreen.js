@@ -1,4 +1,4 @@
-import { SafeAreaView, StyleSheet } from 'react-native';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
 import MonitorHeader from '../src/MonitorHeader';
 import Margin from '../src/Margin';
 import MonitorDate from '../src/MonitorDate';
@@ -11,13 +11,14 @@ const StatsServiceScreen = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <MonitorHeader navigation={navigation} />
       <Margin height={15} />
-      <MonitorDate />
+      <View style={styles.statsDateContainer}>
+        <StatsDate />
+      </View>
       <Margin height={20} />
       <MonitorCamera />
       <Margin height={20} />
       <StatsDetail />
       <Margin height={20} />
-      {/* <StatsDate /> */}
     </SafeAreaView>
   );
 };
@@ -28,6 +29,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  statsDateContainer: {
+    width: '100%', // 전체 화면 너비를 사용
+    alignItems: 'flex-end', // 오른쪽 정렬
+    marginRight: 10,
   },
 });
 
