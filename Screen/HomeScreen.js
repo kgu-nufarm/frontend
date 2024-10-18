@@ -5,18 +5,17 @@ import Search from '../src/Search';
 import UserPlantList from '../src/UserPlantList';
 import FooterBar from '../src/FooterBar';
 import Header from '../src/Header';
-
 const HomeScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
-      <Margin height={10} />
+      <Margin height={40} />
       <Header navigation={navigation} />
-      <Margin height={5} />
+      <Margin height={20} />
       <Search />
-      <Margin height={20} />
+      <Margin height={30} />
       <UserPlantList navigation={navigation} />
-      <Margin height={20} />
-      <FooterBar />
+      {/* <Margin height={20} /> */}
+      {/* <FooterBar /> */}
     </SafeAreaView>
   );
 };
