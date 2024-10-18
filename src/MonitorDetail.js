@@ -62,7 +62,7 @@ const MonitorDetail = (props) => {
       {growth == 1 ? (
         <View>
           <GrowthManagement navigation={props.navigation} />
-          <Margin height={193.5} />
+          <Margin height={103.5} />
         </View>
       ) : null}
       {anomaly == 1 ? (
