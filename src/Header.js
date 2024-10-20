@@ -3,6 +3,7 @@ import { Text, View, Dimensions, SafeAreaView, Modal, Pressable, StyleSheet, Scr
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import AntDesign from '@expo/vector-icons/AntDesign';
+import axios from 'axios';
 
 const Header = (props) => {
   const [modal, setModal] = useState(false);
@@ -19,6 +20,25 @@ const Header = (props) => {
   const onPressModalClose = () => {
     setModal(false);
   };
+
+  // const [isDetected, setIsDetected] = useState(false);
+
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     axios
+  //       .get('http://172.20.10.2:5000/status') // Flask 서버 IP로 변경하세요.
+  //       .then((response) => {
+  //         setIsDetected(response.data.detected);
+  //         console.log(response.data);
+  //       })
+  //       .catch((error) => {
+  //         console.error('Error fetching detection status:', error);
+  //       });
+  //   }, 1000); // 1초마다 상태 확인
+
+  //   // 컴포넌트가 언마운트될 때 인터벌 정리
+  //   return () => clearInterval(interval);
+  // }, []);
   return (
     <View
       style={{
