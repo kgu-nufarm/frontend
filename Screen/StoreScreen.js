@@ -4,11 +4,11 @@ import { View, Text, StyleSheet } from 'react-native';
 import StoreHeader from '../src/StoreHeader';
 import StoreDetail from '../src/StoreDetail';
 
-const StoreScreen = () => {
+const StoreScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <StoreHeader />
-      <StoreDetail />
+      <StoreDetail navigation={navigation} />
     </View>
   );
 };

@@ -1,16 +1,74 @@
-import { Text, View, StyleSheet } from 'react-native';
+import { useState, useEffect } from 'react';
+import { Text, View, StyleSheet, Image } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-const SeedlingStore = () => {
-  const plant_list = [1, 2, 3, 4, 5, 6, 7];
+import { useSelector } from 'react-redux';
+import axios from 'axios';
+const SeedlingStore = (props) => {
+  // Redux에서 accessToken 가져오기
+  const accessToken = useSelector((state) => state.auth.accessToken);
+  const plant_list = [1, 2, 3, 4, 5];
+
+  const [plantId, setPlantId] = useState([]);
+  const [plantName, setPlantName] = useState([]);
+  const [plantPrice, setPlantPrice] = useState([]);
+  const [plantImage, setPlantImage] = useState([]);
+
+  const goToProductInfo = (e) => {
+    props.navigation.navigate('ProductInfo');
+  };
+
+  const [error, setError] = useState(null);
+
+  // API 호출 함수
+  const fetchSensorData = async () => {
+    try {
+      const response = await axios.get('http://43.201.185.92:8080/api/item/category?category=SEEDS', {
+        params: { date: '2024-10-14' },
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          accept: 'application/json;charset=UTF-8',
+        },
+      });
+
+      // 응답에서 data 리스트를 가져와 저장
+      if (response.data && response.data.data) {
+        const data = response.data.data;
+        setPlantId(data.map((item) => item.id));
+        setPlantName(data.map((item) => item.name));
+        setPlantPrice(data.map((item) => item.price));
+        setPlantImage(data.map((item) => item.imageUrl));
+        console.log(response.data.data);
+      }
+    } catch (err) {
+      setError('Error fetching sensor data');
+      if (err.response) {
+        console.error('Server responded with status', err.response.status, 'and message:', err.response.data);
+      } else if (err.request) {
+        console.error('No response received:', err.request);
+      } else {
+        console.error('Error setting up request:', err.message);
+      }
+    }
+  };
+
+  // 컴포넌트가 마운트될 때 API 호출
+  useEffect(() => {
+    if (accessToken) {
+      fetchSensorData();
+    }
+  }, [accessToken]);
   return (
     <>
       <KeyboardAwareScrollView style={styles.container} keyboardShouldPersistTaps="handled">
         <View style={styles.plantContainer}>
           {plant_list.map((item, index) => (
             <View key={index} style={styles.plantbox}>
-              <View style={styles.plantimage}></View>
+              <TouchableOpacity style={styles.plantimage} onPress={goToProductInfo}>
+                <Image source={{ uri: plantImage[index] }} style={styles.imageStyle} />
+              </TouchableOpacity>
               <View>
-                <Text>상추 모종(개)</Text>
+                <Text>{plantName[index]}</Text>
               </View>
             </View>
           ))}
@@ -83,6 +141,10 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 165,
     backgroundColor: 'blue',
+  },
+  imageStyle: {
+    width: '100%',
+    height: 165,
   },
 });
 

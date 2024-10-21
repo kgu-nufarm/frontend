@@ -12,6 +12,8 @@ import MainTabNavigation from './MainTabNavigation';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import AlarmModal from '../src/AlarmModal';
+import ProductInfoScreen from '../Screen/ProductInfoScreen';
+import StoreScreen from '../Screen/StoreScreen';
 
 const Stack = createStackNavigator();
 
@@ -31,6 +33,8 @@ const StackNavigation = () => {
       <Stack.Screen name="Home" component={MainTabNavigation} />
       <Stack.Screen name="Monitor" component={TabNavigation} />
       <Stack.Screen name="Growth_Detail" component={GrowthDeatil} />
+      <Stack.Screen name="Store" component={StoreScreen} />
+      <Stack.Screen name="ProductInfo" component={ProductInfoScreen} />
     </Stack.Navigator>
   );
 };

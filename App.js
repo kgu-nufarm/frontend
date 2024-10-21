@@ -10,25 +10,25 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <StackNavigation />
-        {/* <MainNavigator /> */}
+        {/* <StackNavigation /> */}
+        <MainNavigator />
       </NavigationContainer>
     </Provider>
   );
 }
 
-// // 메인 네비게이터 (로그인 여부에 따라 화면 전환)
-// function MainNavigator() {
-//   // Redux에서 토큰 상태를 가져옴
-//   const accessToken = useSelector((state) => state.auth.accessToken);
+// 메인 네비게이터 (로그인 여부에 따라 화면 전환)
+function MainNavigator() {
+  // Redux에서 토큰 상태를 가져옴
+  const accessToken = useSelector((state) => state.auth.accessToken);
 
-//   return (
-//     <SafeAreaView style={{ flex: 1 }}>
-//       {/* accessToken이 있을 경우 StackNavigation, 없을 경우 LoginScreen 렌더링 */}
-//       {accessToken ? <StackNavigation /> : <LoginScreen />}
-//     </SafeAreaView>
-//   );
-// }
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      {/* accessToken이 있을 경우 StackNavigation, 없을 경우 LoginScreen 렌더링 */}
+      {accessToken ? <StackNavigation /> : <LoginScreen />}
+    </SafeAreaView>
+  );
+}
 
 const styles = StyleSheet.create({
   container: {

@@ -9,13 +9,14 @@ import NutrientStore from './NutrientStore';
 import KitStore from './KitStore';
 import { useState } from 'react';
 
-const StoreDetail = () => {
+const StoreDetail = (props) => {
+  // Redux에서 accessToken 가져오기
+  // const accessToken = useSelector((state) => state.auth.accessToken);
   const [seedling, setSeedling] = useState(1);
   const [soil, setSoil] = useState(0);
   const [nutrient, setNutrient] = useState(0);
   const [kit, setKit] = useState(0);
 
-  const plant_list = [1, 2, 3, 4, 5, 6, 7];
   return (
     <>
       <View style={styles.menubar}>
@@ -73,7 +74,7 @@ const StoreDetail = () => {
       <View style={styles.detail}>
         <Text style={{ marginLeft: 10 }}>개의 상품이 있습니다.</Text>
       </View>
-      {seedling == 1 ? <SeedlingStore /> : null}
+      {seedling == 1 ? <SeedlingStore navigation={props.navigation} /> : null}
       {soil == 1 ? <SoilStore /> : null}
       {nutrient == 1 ? <NutrientStore /> : null}
       {kit == 1 ? <KitStore /> : null}

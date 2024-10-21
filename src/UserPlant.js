@@ -39,4 +39,5 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 15, // 오른쪽 위 모서리 둥글게
   },
 });
+
 export default UserPlant;
