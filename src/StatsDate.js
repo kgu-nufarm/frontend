@@ -5,6 +5,7 @@ import { DatePickerModal, registerTranslation, en } from 'react-native-paper-dat
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Entypo from '@expo/vector-icons/Entypo';
 
+registerTranslation('en', en);
 const StatsDate = () => {
   const [date, setDate] = useState(undefined);
   const [open, setOpen] = React.useState(false);
