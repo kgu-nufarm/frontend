@@ -1,82 +1,22 @@
-import { TouchableOpacity } from 'react-native';
-import { Text, View, StyleSheet, TextInput } from 'react-native';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import EvilIcons from '@expo/vector-icons/EvilIcons';
+import { Text, View, StyleSheet } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import SeedlingStore from './SeedlingStore';
-import SoilStore from './SoilStore';
-import NutrientStore from './NutrientStore';
-import KitStore from './KitStore';
-import { useState } from 'react';
 
-const StoreDetail = () => {
-  const [seedling, setSeedling] = useState(1);
-  const [soil, setSoil] = useState(0);
-  const [nutrient, setNutrient] = useState(0);
-  const [kit, setKit] = useState(0);
-
+const KitStore = () => {
   const plant_list = [1, 2, 3, 4, 5, 6, 7];
   return (
     <>
-      <View style={styles.menubar}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            setSeedling(1);
-            setSoil(0);
-            setNutrient(0);
-            setKit(0);
-          }}
-        >
-          <Text>모종</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            setSeedling(0);
-            setSoil(1);
-            setNutrient(0);
-            setKit(0);
-          }}
-        >
-          <Text>토양</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            setSeedling(0);
-            setSoil(0);
-            setNutrient(1);
-            setKit(0);
-          }}
-        >
-          <Text>영양제</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            setSeedling(0);
-            setSoil(0);
-            setNutrient(0);
-            setKit(1);
-          }}
-        >
-          <Text>SET</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.search}>
-        <View style={styles.input}>
-          <TextInput style={styles.textbox} />
-          <FontAwesome name="search" size={24} color="#269B0F" style={{ marginLeft: 10 }} />
+      <KeyboardAwareScrollView style={styles.container} keyboardShouldPersistTaps="handled">
+        <View style={styles.plantContainer}>
+          {plant_list.map((item, index) => (
+            <View key={index} style={styles.plantbox}>
+              <View style={styles.plantimage}></View>
+              <View>
+                <Text>키트 세트(개)</Text>
+              </View>
+            </View>
+          ))}
         </View>
-      </View>
-      <View style={styles.detail}>
-        <Text style={{ marginLeft: 10 }}>개의 상품이 있습니다.</Text>
-      </View>
-      {seedling == 1 ? <SeedlingStore /> : null}
-      {soil == 1 ? <SoilStore /> : null}
-      {nutrient == 1 ? <NutrientStore /> : null}
-      {kit == 1 ? <KitStore /> : null}
+      </KeyboardAwareScrollView>
     </>
   );
 };
@@ -147,4 +87,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default StoreDetail;
+export default KitStore;
