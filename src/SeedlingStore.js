@@ -23,7 +23,7 @@ const SeedlingStore = (props) => {
   // API 호출 함수
   const fetchSensorData = async () => {
     try {
-      const response = await axios.get('http://43.201.185.92:8080/api/item/category?category=SEEDS', {
+      const response = await axios.get('http://3.34.153.235:8080/api/item/category?category=SEEDS', {
         params: { date: '2024-10-14' },
         headers: {
           Authorization: `Bearer ${accessToken}`,

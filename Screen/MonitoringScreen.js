@@ -13,7 +13,7 @@ const MonitoringScreen = ({ navigation }) => {
       <MonitorDate />
       <Margin height={20} />
       <MonitorCamera />
-      <Margin height={20} />
+      <Margin height={30} />
       <MonitorDetail navigation={navigation} />
       {/* <SensorTable />
       <Margin height={20} />

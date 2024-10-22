@@ -27,7 +27,7 @@ const MonitorDate = () => {
         // backgroundColor: 'blue',
       }}
     >
-      <Text>{currentDateTime}</Text>
+      <Text style={{ fontSize: 17 }}>{currentDateTime}</Text>
     </View>
   );
 };

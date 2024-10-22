@@ -21,14 +21,14 @@ const Header = (props) => {
     setModal(false);
   };
 
-  // const [isDetected, setIsDetected] = useState(false);
+  const [isDetected, setIsDetected] = useState(false);
 
   // useEffect(() => {
   //   const interval = setInterval(() => {
   //     axios
   //       .get('http://172.20.10.2:5000/status') // Flask 서버 IP로 변경하세요.
   //       .then((response) => {
-  //         setIsDetected(response.data.detected);
+  //         setIsDetected(response.data.should_notify);
   //         console.log(response.data);
   //       })
   //       .catch((error) => {
@@ -52,8 +52,18 @@ const Header = (props) => {
       }}
     >
       <View>
-        <Pressable onPress={onPressModalOpen}>
-          <MaterialCommunityIcons name="bell-outline" size={25} color="#269B00" style={{ marginLeft: 15 }} />
+        <Pressable
+          onPress={() => {
+            onPressModalOpen();
+            setIsDetected(false);
+          }}
+        >
+          <MaterialCommunityIcons
+            name={isDetected == true ? 'bell-badge-outline' : 'bell-outline'}
+            size={25}
+            color="#269B00"
+            style={{ marginLeft: 15 }}
+          />
         </Pressable>
       </View>
       <View>

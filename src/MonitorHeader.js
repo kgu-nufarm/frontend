@@ -18,9 +18,9 @@ const MonitorHeader = (props) => {
         width: '100%',
       }}
     >
-      <Ionicons name="arrow-back-outline" size={24} color="#269B00" style={{ marginLeft: 20 }} onPress={goToHome} />
-      <Text style={{ marginRight: 250 }}>상추</Text>
-      <Ionicons name="reorder-three-outline" size={25} color="#269B00" style={{ marginTop: 5, marginRight: 20 }} />
+      <Ionicons name="arrow-back-outline" size={30} color="#269B00" style={{ marginLeft: 20 }} onPress={goToHome} />
+      <Text style={{ marginRight: 290, fontSize: 27 }}>상추</Text>
+      {/* <Ionicons name="reorder-three-outline" size={25} color="#269B00" style={{ marginTop: 5, marginRight: 20 }} /> */}
     </View>
   );
 };

@@ -8,7 +8,6 @@ import Header from '../src/Header';
 const HomeScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar />
       <Margin height={10} />
       <Header navigation={navigation} />
       <Margin height={20} />

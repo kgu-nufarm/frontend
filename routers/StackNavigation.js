@@ -14,6 +14,8 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import AlarmModal from '../src/AlarmModal';
 import ProductInfoScreen from '../Screen/ProductInfoScreen';
 import StoreScreen from '../Screen/StoreScreen';
+import GrowthDeatil2 from '../src/GrowthDetail2';
+import GrowthDeatil3 from '../src/GrowthDetail3';
 
 const Stack = createStackNavigator();
 
@@ -33,6 +35,8 @@ const StackNavigation = () => {
       <Stack.Screen name="Home" component={MainTabNavigation} />
       <Stack.Screen name="Monitor" component={TabNavigation} />
       <Stack.Screen name="Growth_Detail" component={GrowthDeatil} />
+      <Stack.Screen name="Growth_Detail2" component={GrowthDeatil2} />
+      <Stack.Screen name="Growth_Detail3" component={GrowthDeatil3} />
       <Stack.Screen name="Store" component={StoreScreen} />
       <Stack.Screen name="ProductInfo" component={ProductInfoScreen} />
     </Stack.Navigator>

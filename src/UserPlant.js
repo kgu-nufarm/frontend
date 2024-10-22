@@ -1,10 +1,15 @@
-import React from 'react';
-import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { View, StyleSheet, Image, TouchableOpacity, Text } from 'react-native';
 import { Shadow } from 'react-native-shadow-2';
+import Entypo from '@expo/vector-icons/Entypo';
 
 const UserPlant = (props) => {
+  const [like, setLike] = useState(true);
   const goToMonitor = (e) => {
     props.navigation.navigate('Monitor');
+  };
+  const likePress = () => {
+    setLike(!like);
   };
   return (
     <View>
@@ -13,14 +18,21 @@ const UserPlant = (props) => {
           source={{ uri: 'https://cityfarmer.seoul.go.kr/fileManager/www/brd/6261/1617605980762.jpg' }}
           style={styles.imageStyle}
         />
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+          <View style={{ marginLeft: 20, marginTop: 15 }}>
+            <Text style={{ fontSize: 20 }}>상추</Text>
+            <Text>심은 날짜 2024.09.16</Text>
+          </View>
+          <TouchableOpacity onPress={likePress}>
+            <Entypo
+              name={like ? 'star-outlined' : 'star'}
+              size={24}
+              color="black"
+              style={{ marginRight: 20, marginTop: 10 }}
+            />
+          </TouchableOpacity>
+        </View>
       </TouchableOpacity>
-      <Shadow
-        distance={10} // 그림자 거리 설정
-        startColor={'#00000020'} // 그림자 색상
-        offset={[0, 10]} // 그림자 오프셋 (x, y)
-        radius={10} // 그림자 반경 설정
-        containerViewStyle={styles.imageContainer}
-      ></Shadow>
     </View>
   );
 };
@@ -35,8 +47,8 @@ const styles = StyleSheet.create({
   imageStyle: {
     width: 370,
     height: 150,
-    borderTopLeftRadius: 15, // 왼쪽 위 모서리 둥글게
-    borderTopRightRadius: 15, // 오른쪽 위 모서리 둥글게
+    borderTopLeftRadius: 10, // 왼쪽 위 모서리 둥글게
+    borderTopRightRadius: 10, // 오른쪽 위 모서리 둥글게
   },
 });
 

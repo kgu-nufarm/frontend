@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from 'react-native';
 import { LineChart } from 'react-native-gifted-charts';
-import { useSelector } from 'react-redux'; // useSelector import
+import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react'; // useState, useEffect import
 import axios from 'axios';
 const TempGraph = () => {

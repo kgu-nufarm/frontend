@@ -1,5 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet, View } from 'react-native';
+import { SafeAreaView, StyleSheet, View, StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import StackNavigation from './routers/StackNavigation';
 import LoginScreen from './Screen/LoginScreen';
@@ -9,9 +8,10 @@ import store from './src/store';
 export default function App() {
   return (
     <Provider store={store}>
+      <StatusBar />
       <NavigationContainer>
-        {/* <StackNavigation /> */}
-        <MainNavigator />
+        <StackNavigation />
+        {/* <MainNavigator /> */}
       </NavigationContainer>
     </Provider>
   );

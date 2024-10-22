@@ -18,7 +18,6 @@ const MonitorDetail = (props) => {
           alignItems: 'center',
           // paddingVertical: 3,
           // backgroundColor: 'yellow',
-          width: '80%',
         }}
       >
         <TouchableOpacity
@@ -29,7 +28,7 @@ const MonitorDetail = (props) => {
           }}
           style={[styles.button, { backgroundColor: sensor === 1 ? '#269B00' : 'white' }]}
         >
-          <Text style={{ color: sensor === 1 ? 'white' : '#269B00' }}>센서수치</Text>
+          <Text style={{ color: sensor === 1 ? 'white' : '#269B00', fontSize: 18 }}>환경정보</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
@@ -39,7 +38,7 @@ const MonitorDetail = (props) => {
           }}
           style={[styles.button, { backgroundColor: growth === 1 ? '#269B00' : 'white' }]}
         >
-          <Text style={{ color: growth === 1 ? 'white' : '#269B00' }}>성장관리</Text>
+          <Text style={{ color: growth === 1 ? 'white' : '#269B00', fontSize: 18 }}>성장관리</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
@@ -49,45 +48,47 @@ const MonitorDetail = (props) => {
           }}
           style={[styles.button, { backgroundColor: anomaly === 1 ? '#269B00' : 'white' }]}
         >
-          <Text style={{ color: anomaly === 1 ? 'white' : '#269B00' }}>이상감지</Text>
+          <Text style={{ color: anomaly === 1 ? 'white' : '#269B00', fontSize: 18 }}>이상감지</Text>
         </TouchableOpacity>
       </View>
-      <Margin height={5} />
-      {sensor == 1 ? (
-        <View>
-          <SensorTable />
-          <Margin height={100} />
-        </View>
-      ) : null}
-      {growth == 1 ? (
-        <View>
-          <GrowthManagement navigation={props.navigation} />
-          <Margin height={103.5} />
-        </View>
-      ) : null}
-      {anomaly == 1 ? (
-        <View>
-          <AnomalyDectection />
-          <Margin height={273.5} />
-        </View>
-      ) : null}
-      {/* <SensorTable /> */}
-      {/* <GrowthManagement /> */}
-      {/* <AnomalyDectection /> */}
+      <View>
+        <Margin height={20} />
+        {sensor == 1 ? (
+          <View>
+            <SensorTable />
+            <Margin height={100} />
+          </View>
+        ) : null}
+        {growth == 1 ? (
+          <View>
+            <GrowthManagement navigation={props.navigation} />
+          </View>
+        ) : null}
+        {anomaly == 1 ? (
+          <View>
+            <AnomalyDectection navigation={props.navigation} />
+            <Margin height={145} />
+          </View>
+        ) : null}
+        {/* <SensorTable /> */}
+        {/* <GrowthManagement /> */}
+        {/* <AnomalyDectection /> */}
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   button: {
-    height: 40, // 높이 설정
+    height: 50, // 높이 설정
     borderRadius: 25, // 테두리 둥글기
     borderColor: '#269B00', // 테두리 색깔
     borderWidth: 2, // 테두리 두께
     width: 110, // 너비 설정
     alignItems: 'center',
     justifyContent: 'center',
-    margin: 12,
+    marginHorizontal: 10, // 버튼 사이의 수평 간격 조정
+    // margin: 12,
     // backgroundColor: 'blue',
   },
   text: {
