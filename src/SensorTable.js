@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -32,87 +32,36 @@ const SensorTable = () => {
   // }, []);
   return (
     <View style={styles.wrapper}>
-      {/* Table container */}
-      <View style={styles.table}>
-        {/* Table Header */}
-        <View style={styles.table_first}>
-          {/* Table row */}
-          <View
-            style={[
-              styles.text_style,
-              {
-                borderRightWidth: 2, // 왼쪽 테두리 두께
-                borderRightColor: 'white', // 왼쪽 테두리 색깔
-                borderStyle: 'dotted', // 왼쪽 테두리 스타일: 점선
-              },
-            ]}
-          >
-            <Text>온도</Text>
-          </View>
-
-          <View style={styles.text_style}>
-            <Text>{temp}</Text>
-          </View>
+      <View style={styles.box_style}>
+        <View style={styles.textWrapper}>
+          <Text style={styles.label}>온도</Text>
         </View>
-
-        <View style={styles.table_second}>
-          {/* Table row */}
-          <View
-            style={[
-              styles.text_style,
-              {
-                borderRightWidth: 2, // 왼쪽 테두리 두께
-                borderRightColor: 'white', // 왼쪽 테두리 색깔
-                borderStyle: 'dotted', // 왼쪽 테두리 스타일: 점선
-              },
-            ]}
-          >
-            <Text>습도</Text>
-          </View>
-
-          <View style={styles.text_style}>
-            <Text>{humidity}</Text>
-          </View>
+        <View style={styles.numWrapper}>
+          <Text style={styles.num_label}>19°C</Text>
         </View>
-
-        <View style={styles.table_third}>
-          {/* Table row */}
-          <View
-            style={[
-              styles.text_style,
-              {
-                borderRightWidth: 2, // 왼쪽 테두리 두께
-                borderRightColor: 'white', // 왼쪽 테두리 색깔
-                borderStyle: 'dotted', // 왼쪽 테두리 스타일: 점선
-              },
-            ]}
-          >
-            <Text>조도</Text>
-          </View>
-
-          <View style={styles.text_style}>
-            <Text>{illuminance}</Text>
-          </View>
+      </View>
+      <View style={styles.box_style}>
+        <View style={styles.textWrapper}>
+          <Text style={styles.label}>습도</Text>
         </View>
-
-        <View style={styles.table_fourth}>
-          {/* Table row */}
-          <View
-            style={[
-              styles.text_style,
-              {
-                borderRightWidth: 2, // 왼쪽 테두리 두께
-                borderRightColor: 'white', // 왼쪽 테두리 색깔
-                borderStyle: 'dotted', // 왼쪽 테두리 스타일: 점선
-              },
-            ]}
-          >
-            <Text>가스</Text>
-          </View>
-
-          <View style={styles.text_style}>
-            <Text>23</Text>
-          </View>
+        <View style={styles.numWrapper}>
+          <Text style={styles.num_label}>86%</Text>
+        </View>
+      </View>
+      <View style={styles.box_style}>
+        <View style={styles.textWrapper}>
+          <Text style={styles.label}>습도</Text>
+        </View>
+        <View style={styles.numWrapper}>
+          <Text style={styles.num_label}>3023lx</Text>
+        </View>
+      </View>
+      <View style={styles.box_style}>
+        <View style={styles.textWrapper}>
+          <Text style={styles.label}>가스</Text>
+        </View>
+        <View style={styles.numWrapper}>
+          <Text style={styles.num_label}>32%</Text>
         </View>
       </View>
     </View>
@@ -124,50 +73,33 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  table: {
-    width: '90%',
+  box_style: {
+    height: 90, // 높이 설정
+    borderRadius: 10, // 테두리 둥글기
+    width: '95%', // 너비 설정
     backgroundColor: '#E0E0E0',
-    borderColor: '#269B00', // 테두리 색깔
-    borderWidth: 2, // 테두리 두께
-  },
-  table_first: {
-    width: '100%',
-    height: 90,
-    // backgroundColor: 'yellow',
-    flexDirection: 'row',
-    borderBottomWidth: 2, // 하단 테두리 두께
-    borderBottomColor: 'white', // 하단 테두리 색깔
-    borderStyle: 'dotted', // 하단 테두리 스타일: 점선
-  },
-  table_second: {
-    flexDirection: 'row',
-    width: '100%',
-    height: 90,
-    // backgroundColor: 'blue',
-    borderBottomWidth: 2, // 하단 테두리 두께
-    borderBottomColor: 'white', // 하단 테두리 색깔
-    borderStyle: 'dotted', // 하단 테두리 스타일: 점선
-  },
-  table_third: {
-    flexDirection: 'row',
-    width: '100%',
-    height: 90,
-    // backgroundColor: 'green',
-    borderBottomWidth: 2, // 하단 테두리 두께
-    borderBottomColor: 'white', // 하단 테두리 색깔
-    borderStyle: 'dotted', // 하단 테두리 스타일: 점선
-  },
-  table_fourth: {
-    flexDirection: 'row',
-    width: '100%',
-    height: 90,
-    // backgroundColor: 'skyblue',
-  },
-  text_style: {
-    justifyContent: 'center',
     alignItems: 'center',
-    width: '50%',
-    height: '100%',
+    justifyContent: 'center',
+    margin: 10,
+    position: 'relative', // 텍스트 위치를 제어하기 위해 position 추가
+  },
+  textWrapper: {
+    position: 'absolute', // 텍스트를 박스 안에서 배치할 수 있게 설정
+    top: 15, // 위쪽으로부터 10px 위치
+    left: 20, // 왼쪽으로부터 10px 위치
+  },
+  numWrapper: {
+    position: 'absolute', // 텍스트를 박스 안에서 배치할 수 있게 설정
+    top: 40, // 위쪽으로부터 10px 위치
+    right: 20, // 왼쪽으로부터 10px 위치
+  },
+  label: {
+    fontSize: 15, // 글자 크기
+    fontWeight: 'bold', // 글자 두께 설정
+  },
+  num_label: {
+    fontSize: 30, // 글자 크기
+    fontWeight: 'bold', // 글자 두께 설정
   },
 });
 

@@ -56,7 +56,7 @@ const MonitorDetail = (props) => {
         {sensor == 1 ? (
           <View>
             <SensorTable />
-            <Margin height={100} />
+            <Margin height={15} />
           </View>
         ) : null}
         {growth == 1 ? (
