@@ -10,8 +10,8 @@ export default function App() {
     <Provider store={store}>
       <StatusBar />
       <NavigationContainer>
-        <StackNavigation />
-        {/* <MainNavigator /> */}
+        {/* <StackNavigation /> */}
+        <MainNavigator />
       </NavigationContainer>
     </Provider>
   );

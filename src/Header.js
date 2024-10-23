@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, Dimensions, SafeAreaView, Modal, Pressable, StyleSheet, ScrollView } from 'react-native';
+import { Text, View, Modal, Pressable, StyleSheet } from 'react-native';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import AntDesign from '@expo/vector-icons/AntDesign';
@@ -7,6 +7,8 @@ import axios from 'axios';
 
 const Header = (props) => {
   const [modal, setModal] = useState(false);
+  const [isDetected, setIsDetected] = useState(false);
+  const [error, setError] = useState(null);
 
   const goToMonitor = (e) => {
     props.navigation.navigate('Monitor');
@@ -21,24 +23,49 @@ const Header = (props) => {
     setModal(false);
   };
 
-  const [isDetected, setIsDetected] = useState(false);
-
   // useEffect(() => {
   //   const interval = setInterval(() => {
-  //     axios
-  //       .get('http://172.20.10.2:5000/status') // Flask 서버 IP로 변경하세요.
-  //       .then((response) => {
-  //         setIsDetected(response.data.should_notify);
-  //         console.log(response.data);
-  //       })
-  //       .catch((error) => {
-  //         console.error('Error fetching detection status:', error);
-  //       });
-  //   }, 1000); // 1초마다 상태 확인
+  //     const checkDetectionStatus = async () => {
+  //       try {
+  //         const response = await axios.get('http://172.20.10.2:5000/status'); // Flask 서버 IP로 변경하세요.
 
-  //   // 컴포넌트가 언마운트될 때 인터벌 정리
-  //   return () => clearInterval(interval);
+  //         if (response.data.status === true) {
+  //           // status가 true이면 isDetected를 true로 설정
+  //           setIsDetected(true);
+  //           console.log('Detection active:', response.data.status);
+  //         } else {
+  //           // status가 false이면 isDetected를 false로 설정
+  //           setIsDetected(false);
+  //           console.log('Detection inactive:', response.data.status);
+  //         }
+  //       } catch (error) {
+  //         setError('Error fetching detection status');
+  //         console.error('Error fetching detection status:', error);
+  //         setIsDetected(false); // 에러 발생 시 isDetected를 false로 설정
+  //       }
+  //     };
+
+  //     checkDetectionStatus();
+  //   }, 1000); // 1초마다 API 호출
+
+  //   return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 클리어
   // }, []);
+
+  // // reset_status API 호출하는 함수
+  // const handleStopUpdates = async () => {
+  //   try {
+  //     const response = await axios.post('http://172.20.10.2:5000/reset_status'); // Flask 서버 IP로 변경하세요.
+  //     if (response.data.status === false) {
+  //       setIsDetected(false); // status가 false로 변경되면 isDetected를 false로 설정
+  //       console.log('Status reset:', response.data.status);
+  //     }
+  //   } catch (error) {
+  //     setError('Error resetting status');
+  //     console.error('Error resetting status:', error);
+  //     setIsDetected(false); // 에러 발생 시 상태를 false로 설정
+  //   }
+  // };
+
   return (
     <View
       style={{
@@ -46,7 +73,6 @@ const Header = (props) => {
         justifyContent: 'space-between',
         alignItems: 'center',
         paddingVertical: 5,
-        // backgroundColor: 'yellow',
         width: '100%',
         textAlign: 'center',
       }}
@@ -56,10 +82,11 @@ const Header = (props) => {
           onPress={() => {
             onPressModalOpen();
             setIsDetected(false);
+            // handleStopUpdates();
           }}
         >
           <MaterialCommunityIcons
-            name={isDetected == true ? 'bell-badge-outline' : 'bell-outline'}
+            name={isDetected ? 'bell-badge-outline' : 'bell-outline'}
             size={25}
             color="#269B00"
             style={{ marginLeft: 15 }}
@@ -77,27 +104,22 @@ const Header = (props) => {
                 }}
               >
                 <Text style={styles.modalTextStyle}>상추 물주기를 완료했어요.</Text>
-                <Text> (팝업 누르면 모니터링 화면으로 이동)</Text>
+                <Text>(팝업 누르면 모니터링 화면으로 이동)</Text>
               </Pressable>
             </View>
-
             <Pressable style={{ alignItems: 'center' }} onPress={onPressModalClose}>
               <AntDesign name="closecircle" size={24} color="#269B00" />
             </Pressable>
           </View>
         </Modal>
       </View>
-
       <Text
         style={{
           fontSize: 26,
           fontWeight: 'bold',
           color: '#269B00',
-          // backgroundColor: 'blue',
-          alignItems: 'center',
           textAlign: 'center',
           flex: 1,
-          // marginRight: 100,
         }}
       >
         nufarm
@@ -108,14 +130,6 @@ const Header = (props) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    height: '50%',
-    backgroundColor: '#17191c',
-  },
-  /**
-   * 모달 화면 영역
-   */
   modalView: {
     marginTop: 230,
     margin: 30,
@@ -124,10 +138,7 @@ const styles = StyleSheet.create({
     padding: 35,
     alignItems: 'center',
     shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
@@ -145,4 +156,5 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.8)',
   },
 });
+
 export default Header;

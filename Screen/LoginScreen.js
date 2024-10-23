@@ -1,6 +1,6 @@
 // src/screens/LoginScreen.js
 import React, { useState } from 'react';
-import { View, TextInput, Button, Text } from 'react-native';
+import { View, TextInput, Button, Text, StyleSheet } from 'react-native';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { setTokens } from '../src/authSlice';
@@ -44,17 +44,40 @@ export default function LoginScreen() {
   };
 
   return (
-    <SafeAreaView>
-      <TextInput placeholder="Email" value={email} onChangeText={setEmail} style={{ borderWidth: 1, margin: 10 }} />
-      <TextInput
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-        style={{ borderWidth: 1, margin: 10 }}
-      />
-      {error && <Text style={{ color: 'red' }}>{error}</Text>}
-      <Button title="Login" onPress={handleLogin} />
-    </SafeAreaView>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <View>
+        <Text style={{ fontSize: 80, fontWeight: 'bold', color: '#269B00', marginBottom: 70 }}>nufarm</Text>
+      </View>
+      <View style={{ width: '80%', marginBottom: 30 }}>
+        <TextInput
+          placeholder="아이디(이메일)"
+          value={email}
+          onChangeText={setEmail}
+          style={styles.inputBox}
+          placeholderTextColor="#FFFFFF"
+        />
+        <TextInput
+          placeholder="비밀번호"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
+          style={styles.inputBox}
+          placeholderTextColor="#FFFFFF"
+          onSubmitEditing={handleLogin}
+        />
+        {error && <Text style={{ color: 'red' }}>{error}</Text>}
+        {/* <Button title="Login" onPress={handleLogin} /> */}
+      </View>
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  inputBox: {
+    margin: 10,
+    height: 50,
+    textAlign: 'center',
+    backgroundColor: '#D9D9D980',
+    borderRadius: 30,
+  },
+});
