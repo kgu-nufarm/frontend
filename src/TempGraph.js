@@ -3,21 +3,33 @@ import { LineChart } from 'react-native-gifted-charts';
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react'; // useState, useEffect import
 import axios from 'axios';
-const TempGraph = () => {
+
+const TempGraph = ({ userDate }) => {
   // Redux에서 accessToken 가져오기
-  // const accessToken = useSelector((state) => state.auth.accessToken);
+  const accessToken = useSelector((state) => state.auth.accessToken);
 
   // 응답 데이터를 저장할 상태
-  const [sensorData, setSensorData] = useState([
-    23, 45, 56, 32, 44, 50, 60, 72, 38, 40, 52, 55, 34, 47, 49, 59, 63, 66, 30, 42, 51, 58, 35, 39,
-  ]);
-  // const [error, setError] = useState(null);
+  const [sensorData, setSensorData] = useState([]);
+  const [error, setError] = useState(null);
+
+  // userDate를 YYYY-MM-DD 형식으로 변환하는 함수
+  // const formatUserDateToISO = (userDate) => {
+  //   const [year, month, day] = userDate
+  //     .replace('년', '')
+  //     .replace('월', '')
+  //     .replace('일', '')
+  //     .split(' ')
+  //     .map((value) => value.trim().padStart(2, '0'));
+
+  //   return `${year}-${month}-${day}`;
+  // };
 
   // // API 호출 함수
   // const fetchSensorData = async () => {
   //   try {
-  //     const response = await axios.get('http://192.168.137.237:8123/api/sensor/co2/1', {
-  //       params: { date: '2024-10-14' },
+  //     const formattedDate = formatUserDateToISO(userDate); // 날짜 변환
+  //     const response = await axios.get('http://3.34.153.235:8080/api/sensor/co2/1', {
+  //       params: { date: formattedDate }, // 변환된 날짜 사용
   //       headers: {
   //         Authorization: `Bearer ${accessToken}`,
   //         accept: 'application/json;charset=UTF-8',
@@ -30,23 +42,16 @@ const TempGraph = () => {
   //       console.log(response.data.data);
   //     }
   //   } catch (err) {
-  //     setError('Error fetching sensor data');
-  //     if (err.response) {
-  //       console.error('Server responded with status', err.response.status, 'and message:', err.response.data);
-  //     } else if (err.request) {
-  //       console.error('No response received:', err.request);
-  //     } else {
-  //       console.error('Error setting up request:', err.message);
-  //     }
+  //     console.error('Error fetching sensor data:', err);
   //   }
   // };
 
   // // 컴포넌트가 마운트될 때 API 호출
   // useEffect(() => {
-  //   if (accessToken) {
+  //   if (userDate) {
   //     fetchSensorData();
   //   }
-  // }, [accessToken]);
+  // }, [userDate]);
 
   const data = sensorData.map((sensor, index) => ({ value: sensor, label: index + 1 }));
 
@@ -54,7 +59,7 @@ const TempGraph = () => {
     <View style={styles.container}>
       <LineChart
         data={data}
-        width={300} // 차트의 너비
+        width={300} // 차트의 너비.
         height={200} // 차트의 높이
         color="#00bfff" // 선 색상
         isAnimated // 애니메이션 활성화

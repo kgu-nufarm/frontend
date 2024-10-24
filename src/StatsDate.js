@@ -6,11 +6,10 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Entypo from '@expo/vector-icons/Entypo';
 
 registerTranslation('en', en);
-const StatsDate = () => {
+const StatsDate = ({ userDate, setUserDate }) => {
   const [date, setDate] = useState(undefined);
   const [open, setOpen] = React.useState(false);
   const [currentDateTime, setCurrentDateTime] = useState('');
-  const [userDate, setUserDate] = useState(''); // 사용자 선택 날짜 상태
 
   const onDismissSingle = useCallback(() => {
     setOpen(false);
@@ -22,7 +21,7 @@ const StatsDate = () => {
       setDate(params.date); // 기존 date 상태 업데이트
       setUserDate(formatDate(params.date)); // 사용자 선택 날짜 상태 업데이트
     },
-    [setOpen, setDate]
+    [setOpen, setDate, setUserDate]
   );
 
   useEffect(() => {

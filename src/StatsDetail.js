@@ -6,7 +6,7 @@ import HumidityGraph from './HumidityGraph';
 import IlluminanceGraph from './IlluminanceGraph';
 import { useState } from 'react';
 
-const StatsDetail = () => {
+const StatsDetail = ({ userDate }) => {
   const [tempGraph, setTempGraph] = useState(1);
   const [humidityGraph, setHumidityGraph] = useState(0);
   const [illuminanceGraph, setIlluminanceGraph] = useState(0);
@@ -61,7 +61,7 @@ const StatsDetail = () => {
         </TouchableOpacity>
       </View>
       <Margin height={10} />
-      {tempGraph == 1 ? <TempGraph /> : null}
+      {tempGraph == 1 ? <TempGraph userDate={userDate} /> : null}
       {humidityGraph == 1 ? <HumidityGraph /> : null}
       {illuminanceGraph == 1 ? <IlluminanceGraph /> : null}
       {gasGraph == 1 ? <GasGraph /> : null}

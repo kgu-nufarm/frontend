@@ -18,9 +18,9 @@ const GrowthHeader = (props) => {
         width: '100%',
       }}
     >
-      <Ionicons name="arrow-back-outline" size={24} color="#269B00" style={{ marginLeft: 20 }} onPress={goToMonitor} />
-      <Text style={{ marginRight: 250 }}>상추</Text>
-      <Ionicons name="reorder-three-outline" size={25} color="#269B00" style={{ marginTop: 5, marginRight: 20 }} />
+      <Ionicons name="arrow-back-outline" size={30} color="#269B00" style={{ marginLeft: 17 }} onPress={goToMonitor} />
+      <Text style={{ marginRight: 250, fontSize: 27 }}>성장관리</Text>
+      {/* <Ionicons name="reorder-three-outline" size={25} color="#269B00" style={{ marginTop: 5, marginRight: 20 }} /> */}
     </View>
   );
 };
