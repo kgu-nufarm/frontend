@@ -12,12 +12,11 @@ const FooterBar = () => {
         justifyContent: 'space-between',
         alignItems: 'center',
         paddingVertical: 15,
-        // backgroundColor: 'yellow',
       }}
     >
-      <MaterialCommunityIcons name="shopping-outline" size={25} color="#269B00" />
-      <Ionicons name="home-outline" size={25} style={{ color: '#269B00', paddingHorizontal: 120 }} />
-      <FontAwesome5 name="user" size={23} color="#269B00" />
+      <MaterialCommunityIcons name="shopping-outline" size={25} color="#269B00" style={{ marginHorizontal: 50 }} />
+      <Ionicons name="home-outline" size={25} style={{ color: '#269B00', marginHorizontal: 50 }} />
+      {/* <FontAwesome5 name="user" size={23} color="#269B00" style={{ marginHorizontal: 30 }} /> */}
     </View>
   );
 };

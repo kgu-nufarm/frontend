@@ -6,7 +6,7 @@ const StoreHeader = () => {
     <View style={styles.container}>
       <View style={{ flexDirection: 'row' }}>
         <Text style={styles.text}>스토어</Text>
-        <AntDesign name="shoppingcart" size={24} color="black" />
+        <AntDesign name="shoppingcart" size={24} color="#269B00" />
       </View>
     </View>
   );
@@ -17,11 +17,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 10,
-    backgroundColor: 'yellow',
+    padding: 20,
+    // backgroundColor: 'yellow',
   },
   text: {
-    marginRight: 300, // 텍스트와 아이콘 사이의 거리 설정
+    marginRight: 280, // 텍스트와 아이콘 사이의 거리 설정
+    fontSize: 20,
   },
 });
 
