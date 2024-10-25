@@ -12,7 +12,7 @@ const GrowthDeatil3 = ({ navigation }) => {
       <MonitorDate />
       <Margin height={20} />
       <View style={styles.box_header_style}>
-        <Text style={{ color: 'white', fontWeight: 'bold', marginLeft: 14 }}>③ 3단계 세부내용</Text>
+        <Text style={{ color: 'white', fontWeight: 'bold', marginLeft: 14 }}>③ㄴ 3단계 세부내용</Text>
       </View>
       <Margin height={20} />
       <View style={styles.box_style}>

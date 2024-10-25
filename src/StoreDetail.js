@@ -1,22 +1,82 @@
 import { TouchableOpacity } from 'react-native';
-import { Text, View, StyleSheet, TextInput } from 'react-native';
+import { Text, View, StyleSheet, TextInput, Image } from 'react-native';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import EvilIcons from '@expo/vector-icons/EvilIcons';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import SeedlingStore from './SeedlingStore';
-import SoilStore from './SoilStore';
-import NutrientStore from './NutrientStore';
-import KitStore from './KitStore';
-import { useState } from 'react';
-
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
 const StoreDetail = (props) => {
   // Redux에서 accessToken 가져오기
-  // const accessToken = useSelector((state) => state.auth.accessToken);
+  const accessToken = useSelector((state) => state.auth.accessToken);
+
   const [seedling, setSeedling] = useState(1);
   const [soil, setSoil] = useState(0);
   const [nutrient, setNutrient] = useState(0);
   const [kit, setKit] = useState(0);
 
+  const [plantId, setPlantId] = useState([]);
+  const [plantName, setPlantName] = useState([]);
+  const [plantPrice, setPlantPrice] = useState([]);
+  const [plantImage, setPlantImage] = useState([]);
+
+  const [error, setError] = useState(null);
+
+  // 카테고리 값 설정
+  let category = '';
+  if (seedling === 1) {
+    category = 'SEEDS';
+  } else if (soil === 1) {
+    category = 'SOIL';
+  } else if (nutrient === 1) {
+    category = 'NUTRITION';
+  } else if (kit === 1) {
+    category = 'SET';
+  }
+  const goToProductInfo = (e) => {
+    props.navigation.navigate('ProductInfo');
+  };
+  // API 호출 함수
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(`http://3.34.153.235:8080/api/item/category?category=${category}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          accept: 'application/json;charset=UTF-8',
+        },
+      });
+
+      // 응답에서 data 리스트를 가져와 저장
+      if (response.data && response.data.data) {
+        const data = response.data.data;
+        setPlantId(data.map((item) => item.id));
+        setPlantName(data.map((item) => item.name));
+        setPlantPrice(data.map((item) => item.price));
+        setPlantImage(data.map((item) => item.imageUrl));
+      }
+    } catch (err) {
+      setError('Error fetching sensor data');
+      if (err.response) {
+        console.error('Server responded with status', err.response.status, 'and message:', err.response.data);
+      } else if (err.request) {
+        console.error('No response received:', err.request);
+      } else {
+        console.error('Error setting up request:', err.message);
+      }
+    }
+  };
+
+  // 컴포넌트가 마운트될 때 API 호출
+  useEffect(() => {
+    if (accessToken) {
+      fetchData();
+    }
+  }, [accessToken]);
+
+  // 상태가 변경될 때마다 API 호출
+  useEffect(() => {
+    fetchData();
+  }, [category]);
   return (
     <>
       <View style={styles.menubar}>
@@ -71,13 +131,26 @@ const StoreDetail = (props) => {
           <FontAwesome name="search" size={24} color="#269B0F" style={{ marginLeft: 10 }} />
         </View>
       </View>
-      <View style={styles.detail}>
-        <Text style={{ marginLeft: 10 }}>개의 상품이 있습니다.</Text>
-      </View>
-      {seedling == 1 ? <SeedlingStore navigation={props.navigation} /> : null}
-      {soil == 1 ? <SoilStore /> : null}
-      {nutrient == 1 ? <NutrientStore /> : null}
-      {kit == 1 ? <KitStore /> : null}
+
+      <>
+        <View style={styles.detail}>
+          <Text style={{ marginLeft: 10 }}>{plantId.length}개의 상품이 있습니다.</Text>
+        </View>
+        <KeyboardAwareScrollView style={styles.container} keyboardShouldPersistTaps="handled">
+          <View style={styles.plantContainer}>
+            {plantId.map((item, index) => (
+              <View key={index} style={styles.plantbox}>
+                <TouchableOpacity style={styles.plantimage} onPress={goToProductInfo}>
+                  <Image source={{ uri: plantImage[index] }} style={styles.imageStyle} />
+                </TouchableOpacity>
+                <View>
+                  <Text>{plantName[index]}</Text>
+                </View>
+              </View>
+            ))}
+          </View>
+        </KeyboardAwareScrollView>
+      </>
     </>
   );
 };
@@ -145,6 +218,10 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 165,
     backgroundColor: 'blue',
+  },
+  imageStyle: {
+    width: '100%',
+    height: 165,
   },
 });
 

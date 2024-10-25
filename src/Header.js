@@ -1,17 +1,54 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View, Modal, Pressable, StyleSheet } from 'react-native';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import { useSelector } from 'react-redux';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import axios from 'axios';
+import Margin from './Margin';
 
 const Header = (props) => {
+  // Redux에서 accessToken 가져오기
+  const accessToken = useSelector((state) => state.auth.accessToken);
+
   const [modal, setModal] = useState(false);
   const [isDetected, setIsDetected] = useState(false);
   const [error, setError] = useState(null);
-
+  const [alaram, setAlarm] = useState([]);
+  const [message, setMessage] = useState([]);
+  const [date, setDate] = useState([]);
   const goToMonitor = (e) => {
     props.navigation.navigate('Monitor');
+  };
+
+  // API 호출 함수
+  const fetchSensorData = async () => {
+    try {
+      const response = await axios.get('http://3.34.153.235:8080/api/notification/get', {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          accept: 'application/json;charset=UTF-8',
+        },
+      });
+
+      // 응답에서 data 리스트를 가져와 저장
+      if (response.data && response.data.data) {
+        const data = response.data.data;
+        setMessage(data.map((item) => item.message));
+        setDate(data.map((item) => item.time));
+        setAlarm(data.map((item) => item.id));
+        console.log(response.data.data);
+      }
+    } catch (err) {
+      setError('Error fetching sensor data');
+      if (err.response) {
+        console.error('Server responded with status', err.response.status, 'and message:', err.response.data);
+      } else if (err.request) {
+        console.error('No response received:', err.request);
+      } else {
+        console.error('Error setting up request:', err.message);
+      }
+    }
   };
 
   const onPressModalOpen = () => {
@@ -82,7 +119,8 @@ const Header = (props) => {
           onPress={() => {
             onPressModalOpen();
             setIsDetected(false);
-            // handleStopUpdates();
+            handleStopUpdates();
+            fetchSensorData();
           }}
         >
           <MaterialCommunityIcons
@@ -96,18 +134,23 @@ const Header = (props) => {
       <View>
         <Modal animationType="slide" visible={modal} transparent={true}>
           <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <Pressable
-                onPress={() => {
-                  goToMonitor();
-                  onPressModalClose();
-                }}
-              >
-                <Text style={styles.modalTextStyle}>상추 물주기를 완료했어요.</Text>
-                <Text>(팝업 누르면 모니터링 화면으로 이동)</Text>
-              </Pressable>
-            </View>
-            <Pressable style={{ alignItems: 'center' }} onPress={onPressModalClose}>
+            <Margin height={60} />
+            {alaram.map((item, index) => (
+              <View key={index} style={styles.modalView}>
+                <Pressable
+                  onPress={() => {
+                    goToMonitor();
+                    onPressModalClose();
+                  }}
+                >
+                  <Text style={styles.modalTextStyle}>
+                    {message[index]} {date[index]}
+                  </Text>
+                </Pressable>
+              </View>
+            ))}
+
+            <Pressable style={{ alignItems: 'center', marginTop: 10 }} onPress={onPressModalClose}>
               <AntDesign name="closecircle" size={24} color="#269B00" />
             </Pressable>
           </View>
@@ -131,11 +174,10 @@ const Header = (props) => {
 
 const styles = StyleSheet.create({
   modalView: {
-    marginTop: 230,
-    margin: 30,
+    margin: 10,
     backgroundColor: 'white',
     borderRadius: 20,
-    padding: 35,
+    padding: 30,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -147,7 +189,6 @@ const styles = StyleSheet.create({
     color: '#17191c',
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 50,
   },
   centeredView: {
     flex: 1,
