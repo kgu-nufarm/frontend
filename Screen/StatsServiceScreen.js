@@ -6,6 +6,7 @@ import MonitorDate from '../src/MonitorDate';
 import MonitorCamera from '../src/MonitorCamera';
 import StatsDetail from '../src/StatsDetail';
 import StatsDate from '../src/StatsDate';
+import StatsCamera from '../src/StatsCamera';
 
 const StatsServiceScreen = ({ navigation }) => {
   const [userDate, setUserDate] = useState(''); // 상위에서 상태 관리

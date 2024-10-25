@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, Modal, Pressable, StyleSheet } from 'react-native';
+import { Text, View, Modal, Pressable, StyleSheet, ScrollView } from 'react-native';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { useSelector } from 'react-redux';
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -133,7 +133,7 @@ const Header = (props) => {
       </View>
       <View>
         <Modal animationType="slide" visible={modal} transparent={true}>
-          <View style={styles.centeredView}>
+          <ScrollView style={styles.centeredView}>
             <Margin height={60} />
             {alaram.map((item, index) => (
               <View key={index} style={styles.modalView}>
@@ -153,7 +153,7 @@ const Header = (props) => {
             <Pressable style={{ alignItems: 'center', marginTop: 10 }} onPress={onPressModalClose}>
               <AntDesign name="closecircle" size={24} color="#269B00" />
             </Pressable>
-          </View>
+          </ScrollView>
         </Modal>
       </View>
       <Text

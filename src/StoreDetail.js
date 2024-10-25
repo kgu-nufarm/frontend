@@ -24,6 +24,7 @@ const StoreDetail = (props) => {
 
   const [error, setError] = useState(null);
 
+  const [searchItem, setSearchItem] = useState('');
   // 카테고리 값 설정
   let category = '';
   if (seedling === 1) {
@@ -79,6 +80,13 @@ const StoreDetail = (props) => {
   useEffect(() => {
     fetchData();
   }, [category]);
+
+  // 검색 핸들러
+  const handleSearch = () => {
+    // searchItem에 값을 저장
+    console.log(searchItem); // 디버깅 용도로 현재 값을 콘솔에 출력
+    // 여기에서 검색 로직을 추가할 수 있습니다.
+  };
   return (
     <>
       <View style={styles.menubar}>
@@ -129,8 +137,16 @@ const StoreDetail = (props) => {
       </View>
       <View style={styles.search}>
         <View style={styles.input}>
-          <TextInput style={styles.textbox} placeholder="검색어를 입력하세요." placeholderTextColor="#FFFFFF" />
-          <Fontisto name="search" size={15} color="black" style={{ marginLeft: 15 }} />
+          <TextInput
+            style={styles.textbox}
+            placeholder="검색어를 입력하세요."
+            placeholderTextColor="#FFFFFF"
+            onChangeText={(text) => setSearchItem(text)}
+            onSubmitEditing={handleSearch}
+          />
+          <TouchableOpacity onPress={handleSearch}>
+            <Fontisto name="search" size={15} color="black" style={{ marginLeft: 15 }} />
+          </TouchableOpacity>
           {/* <EvilIcons name="search" size={24} color="black" style={{ marginLeft: 10 }} /> */}
         </View>
       </View>
