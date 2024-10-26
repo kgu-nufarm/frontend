@@ -2,63 +2,66 @@ import { View, Text, StyleSheet } from 'react-native';
 import { LineChart } from 'react-native-gifted-charts';
 import { useSelector } from 'react-redux'; // useSelector import
 import { useState, useEffect } from 'react'; // useState, useEffect import
-const HumidityGraph = () => {
-  // Redux에서 accessToken 가져오기
-  // const accessToken = useSelector((state) => state.auth.accessToken);
+import axios from 'axios';
+const HumidityGraph = ({ userDate }) => {
+  const accessToken = useSelector((state) => state.auth.accessToken);
+  const [sensorData, setSensorData] = useState([]);
+  const [error, setError] = useState(null);
 
-  // 응답 데이터를 저장할 상태
-  const [sensorData, setSensorData] = useState([
-    22, 21, 22, 22, 25, 24, 22, 21, 21, 24, 23, 23, 21, 25, 21, 25, 23, 25, 24, 24, 24, 24, 25, 23,
-  ]);
-  // const [error, setError] = useState(null);
+  const formatUserDateToISO = (date) => {
+    // 입력 형식이 YYYYMMDD일 경우 처리
+    if (date.length === 8) {
+      const year = date.slice(0, 4);
+      const month = date.slice(4, 6);
+      const day = date.slice(6, 8);
+      return `${year}-${month}-${day}`;
+    }
 
-  // // API 호출 함수
-  // const fetchSensorData = async () => {
-  //   try {
-  //     const response = await axios.get('http://192.168.137.237:8123/api/sensor/co2/1', {
-  //       params: { date: '2024-10-14' },
-  //       headers: {
-  //         Authorization: `Bearer ${accessToken}`,
-  //         accept: 'application/json;charset=UTF-8',
-  //       },
-  //     });
+    // 이미 YYYY-MM-DD 형식이면 그대로 반환
+    const parsedDate = new Date(date);
+    return parsedDate.toISOString().split('T')[0]; // YYYY-MM-DD 형식으로 반환
+  };
 
-  //     // 응답에서 data 리스트를 가져와 저장
-  //     if (response.data && response.data.data) {
-  //       setSensorData(response.data.data);
-  //       console.log(response.data.data);
-  //     }
-  //   } catch (err) {
-  //     setError('Error fetching sensor data');
-  //     if (err.response) {
-  //       console.error('Server responded with status', err.response.status, 'and message:', err.response.data);
-  //     } else if (err.request) {
-  //       console.error('No response received:', err.request);
-  //     } else {
-  //       console.error('Error setting up request:', err.message);
-  //     }
-  //   }
-  // };
-  // // 컴포넌트가 마운트될 때 API 호출
-  // useEffect(() => {
-  //   if (accessToken) {
-  //     fetchSensorData();
-  //   }
-  // }, [accessToken]);
+  const fetchSensorData = async () => {
+    try {
+      const formattedDate = formatUserDateToISO(userDate);
 
-  const data = sensorData.map((sensor, index) => ({
-    value: sensor,
-    label: index + 1,
+      const response = await axios.get(`http://<서버주소>/api/sensor/temperature/1`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          accept: 'application/json;charset=UTF-8',
+        },
+        params: {
+          date: formattedDate,
+        },
+      });
+
+      if (response.data && response.data.data) {
+        setSensorData(response.data.data.slice(1, 24));
+      }
+    } catch (err) {
+      console.error('Error fetching sensor data:', err);
+      setError('데이터를 불러오는 중 오류가 발생했습니다.');
+    }
+  };
+
+  useEffect(() => {
+    if (userDate) {
+      fetchSensorData();
+    }
+  }, [userDate]);
+
+  const data = sensorData.map((item, index) => ({
+    value: item,
+    label: index + 1, // 1부터 24까지의 레이블 설정
   }));
   return (
     <View style={styles.container}>
       <LineChart
         data={data}
         width={300} // 차트의 너비
-        height={200} // 차트의 높이
+        height={300} // 차트의 높이
         color="#269B00" // 선 색상
-        isAnimated // 애니메이션 활성화
-        hideDataPoints
         yAxisOffset={0}
       />
     </View>

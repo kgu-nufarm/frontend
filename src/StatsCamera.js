@@ -20,14 +20,12 @@ const StatsCamera = () => {
     <View>
       <Shadow distance={6} startColor={'#00000020'} offset={[0, 5]} radius={10}>
         <View style={styles.boxStyle}>
-          {nextImageUri !== '' && (
-            <Image
-              source={{ uri: nextImageUri }}
-              style={[styles.webcamImage, { position: 'absolute', opacity: 0 }]}
-              onLoad={() => setImageUri(nextImageUri)}
-            />
-          )}
-          {imageUri !== '' && <Image source={{ uri: imageUri }} style={styles.webcamImage} resizeMode="cover" />}
+          {/* <Image
+            source={{ uri: nextImageUri }}
+            style={[styles.webcamImage, { position: 'absolute', opacity: 0 }]}
+            onLoad={() => setImageUri(nextImageUri)}
+          />
+          <Image source={{ uri: imageUri }} style={styles.webcamImage} resizeMode="cover" /> */}
         </View>
       </Shadow>
     </View>

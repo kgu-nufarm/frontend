@@ -29,7 +29,7 @@ const StatsDate = ({ userDate, setUserDate }) => {
     const year = now.getFullYear(); // 2024
     const month = (now.getMonth() + 1).toString().padStart(2, '0'); // 01 (0-based index, so +1)
     const day = now.getDate().toString().padStart(2, '0'); // 01
-    const formattedDateTime = `${year}년 ${month}월 ${day}일 `;
+    const formattedDateTime = `${year}-${month}-${day}`;
     setCurrentDateTime(formattedDateTime);
   }, []);
 
@@ -38,7 +38,7 @@ const StatsDate = ({ userDate, setUserDate }) => {
     const year = date.getFullYear();
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const day = date.getDate().toString().padStart(2, '0');
-    return `${year}년 ${month}월 ${day}일`;
+    return `${year}-${month}-${day}`;
   };
 
   return (
