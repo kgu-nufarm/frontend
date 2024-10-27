@@ -65,6 +65,7 @@ const StatsDetail = ({ userDate }) => {
       {humidityGraph == 1 ? <HumidityGraph userDate={userDate} /> : null}
       {illuminanceGraph == 1 ? <IlluminanceGraph userDate={userDate} /> : null}
       {gasGraph == 1 ? <GasGraph userDate={userDate} /> : null}
+      <Margin height={95} />
     </View>
   );
 };

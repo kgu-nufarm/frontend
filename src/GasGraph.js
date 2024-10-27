@@ -26,7 +26,7 @@ const GasGraph = ({ userDate }) => {
     try {
       const formattedDate = formatUserDateToISO(userDate);
 
-      const response = await axios.get(`http://<서버주소>:8080/api/sensor/co2/1`, {
+      const response = await axios.get(`http://3.34.153.235:8080/api/sensor/co2/1`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
           accept: 'application/json;charset=UTF-8',

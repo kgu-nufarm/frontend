@@ -13,11 +13,9 @@ const StatsServiceScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <MonitorHeader navigation={navigation} />
-      <Margin height={15} />
       <View style={styles.statsDateContainer}>
         <StatsDate userDate={userDate} setUserDate={setUserDate} />
       </View>
-      <Margin height={20} />
       <MonitorCamera />
       <Margin height={20} />
       <StatsDetail userDate={userDate} />

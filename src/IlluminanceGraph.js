@@ -27,7 +27,7 @@ const IlluminanceGraph = ({ userDate }) => {
     try {
       const formattedDate = formatUserDateToISO(userDate);
 
-      const response = await axios.get(`http://<서버주소>/api/sensor/illuminance/1`, {
+      const response = await axios.get(`http://3.34.153.235:8080/api/sensor/illuminance/1`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
           accept: 'application/json;charset=UTF-8',
@@ -57,7 +57,7 @@ const IlluminanceGraph = ({ userDate }) => {
     value: item,
     label: index + 1, // 1부터 24까지의 레이블 설정
   }));
-  console.log(data);
+
   return (
     <View style={styles.container}>
       <LineChart

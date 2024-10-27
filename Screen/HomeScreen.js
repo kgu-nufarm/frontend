@@ -5,15 +5,17 @@ import Search from '../src/Search';
 import UserPlantList from '../src/UserPlantList';
 import FooterBar from '../src/FooterBar';
 import Header from '../src/Header';
+import { useState } from 'react';
 const HomeScreen = ({ navigation }) => {
+  const [searchPlant, setSearchPlant] = useState('');
   return (
     <SafeAreaView style={styles.container}>
       <Margin height={10} />
       <Header navigation={navigation} />
       <Margin height={20} />
-      <Search />
+      <Search setSearchPlant={setSearchPlant} />
       <Margin height={30} />
-      <UserPlantList navigation={navigation} />
+      <UserPlantList navigation={navigation} searchPlant={searchPlant} />
       {/* <Margin height={20} /> */}
       {/* <FooterBar /> */}
     </SafeAreaView>

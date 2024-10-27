@@ -42,13 +42,19 @@ const StatsDate = ({ userDate, setUserDate }) => {
   };
 
   return (
-    <View>
-      <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+    <View
+      style={{
+        // backgroundColor: 'yellow',
+        width: '100%',
+        height: 60,
+        justifyContent: 'center',
+      }}
+    >
+      <View style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 180, marginTop: 10 }}>
         <Button onPress={() => setOpen(true)} uppercase={false}>
-          <Text>
-            {userDate ? userDate : currentDateTime}
-            <Entypo name="triangle-down" size={24} color="black" />
-          </Text>
+          <Text style={{ color: 'black', fontSize: 19 }}>조회 날짜 </Text>
+          <Text style={{ color: 'black', fontSize: 19 }}>{userDate ? userDate : currentDateTime} </Text>
+          <Entypo name="triangle-down" size={15} color="black" />
         </Button>
 
         <DatePickerModal
