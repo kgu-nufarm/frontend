@@ -2,7 +2,7 @@ import { View, Text } from 'react-native';
 
 import Ionicons from '@expo/vector-icons/Ionicons';
 
-const GrowthHeader = ({ navigation }) => {
+const AnomalyHeader = ({ navigation }) => {
   const goToMonitor = (e) => {
     navigation.navigate('Monitor');
   };
@@ -19,10 +19,10 @@ const GrowthHeader = ({ navigation }) => {
       }}
     >
       <Ionicons name="arrow-back-outline" size={30} color="#269B00" style={{ marginLeft: 17 }} onPress={goToMonitor} />
-      <Text style={{ marginRight: 250, fontSize: 27 }}>성장관리</Text>
+      <Text style={{ marginRight: 250, fontSize: 27 }}>이상감지</Text>
       {/* <Ionicons name="reorder-three-outline" size={25} color="#269B00" style={{ marginTop: 5, marginRight: 20 }} /> */}
     </View>
   );
 };
 
-export default GrowthHeader;
+export default AnomalyHeader;

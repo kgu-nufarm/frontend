@@ -9,11 +9,11 @@ const AnomalyDectection = (props) => {
   const [isPressed_1, setIsPressed_1] = useState(false);
   const [isPressed_2, setIsPressed_2] = useState(false);
 
-  const goToGrowth1 = () => {
-    props.navigation.navigate('Growth_Detail');
+  const goToAnomaly = () => {
+    props.navigation.navigate('AnomalyDetail');
   };
-  const goToGrowth2 = () => {
-    props.navigation.navigate('Growth_Detail2');
+  const goToAnomaly2 = () => {
+    props.navigation.navigate('AnomalyDetail2');
   };
 
   return (
@@ -23,7 +23,7 @@ const AnomalyDectection = (props) => {
         style={[styles.box_style, { borderColor: isPressed_1 ? '#269B00' : 'transparent', borderWidth: 2 }]}
         onPressIn={() => setIsPressed_1(true)}
         onPressOut={() => setIsPressed_1(false)}
-        onPress={goToGrowth1}
+        onPress={goToAnomaly}
       >
         <View style={{ flexDirection: 'row', alignItems: 'center', width: '100%' }}>
           <AntDesign name="exclamationcircleo" size={20} color="#8080808C" style={{ marginLeft: 20 }} />
@@ -45,7 +45,7 @@ const AnomalyDectection = (props) => {
         style={[styles.box_style, { borderColor: isPressed_2 ? '#269B00' : 'transparent', borderWidth: 2 }]}
         onPressIn={() => setIsPressed_2(true)}
         onPressOut={() => setIsPressed_2(false)}
-        onPress={goToGrowth2}
+        onPress={goToAnomaly2}
       >
         <View style={{ flexDirection: 'row', alignItems: 'center', width: '100%' }}>
           <AntDesign name="exclamationcircleo" size={20} color="#8080808C" style={{ marginLeft: 20 }} />

@@ -50,7 +50,7 @@ const SensorTable = () => {
       </View>
       <View style={styles.box_style}>
         <View style={styles.textWrapper}>
-          <Text style={styles.label}>습도</Text>
+          <Text style={styles.label}>조도</Text>
         </View>
         <View style={styles.numWrapper}>
           <Text style={styles.num_label}>3023lx</Text>
