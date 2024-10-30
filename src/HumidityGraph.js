@@ -26,7 +26,7 @@ const HumidityGraph = ({ userDate }) => {
     try {
       const formattedDate = formatUserDateToISO(userDate);
 
-      const response = await axios.get(`http://3.34.153.235:8080/api/sensor/temperature/1`, {
+      const response = await axios.get(`http://3.34.153.235:8080/api/sensor/humidity/1`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
           accept: 'application/json;charset=UTF-8',
@@ -37,7 +37,7 @@ const HumidityGraph = ({ userDate }) => {
       });
 
       if (response.data && response.data.data) {
-        setSensorData(response.data.data.slice(1, 24));
+        setSensorData(response.data.data.slice(1, 25));
       }
     } catch (err) {
       console.error('Error fetching sensor data:', err);

@@ -34,10 +34,25 @@ const Header = (props) => {
       // 응답에서 data 리스트를 가져와 저장
       if (response.data && response.data.data) {
         const data = response.data.data;
+
+        const formatDateToKST = (dateString) => {
+          const date = new Date(dateString);
+          // 한국 시간대 UTC+9로 변환
+          const kstDate = new Date(date.getTime() + 9 * 60 * 60 * 1000);
+          const year = kstDate.getFullYear();
+          const month = String(kstDate.getMonth() + 1).padStart(2, '0');
+          const day = String(kstDate.getDate()).padStart(2, '0');
+          const hours = kstDate.getHours();
+          const minutes = String(kstDate.getMinutes()).padStart(2, '0');
+          const ampm = hours >= 12 ? 'PM' : 'AM';
+          const formattedHour = hours % 12 || 12;
+
+          return `${year}.${month}.${day} ${ampm} ${String(formattedHour).padStart(2, '0')}:${minutes}`;
+        };
+
         setMessage(data.map((item) => item.message));
-        setDate(data.map((item) => item.time));
+        setDate(data.map((item) => formatDateToKST(item.time)));
         setAlarm(data.map((item) => item.id));
-        console.log(response.data.data);
       }
     } catch (err) {
       setError('Error fetching sensor data');
@@ -64,7 +79,7 @@ const Header = (props) => {
   //   const interval = setInterval(() => {
   //     const checkDetectionStatus = async () => {
   //       try {
-  //         const response = await axios.get('http://172.20.10.2:5000/status'); // Flask 서버 IP로 변경하세요.
+  //         const response = await axios.get('http://192.168.137.14:5000/status'); // Flask 서버 IP로 변경하세요.
 
   //         if (response.data.status === true) {
   //           // status가 true이면 isDetected를 true로 설정
@@ -88,20 +103,20 @@ const Header = (props) => {
   //   return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 클리어
   // }, []);
 
-  // // reset_status API 호출하는 함수
-  // const handleStopUpdates = async () => {
-  //   try {
-  //     const response = await axios.post('http://172.20.10.2:5000/reset_status'); // Flask 서버 IP로 변경하세요.
-  //     if (response.data.status === false) {
-  //       setIsDetected(false); // status가 false로 변경되면 isDetected를 false로 설정
-  //       console.log('Status reset:', response.data.status);
-  //     }
-  //   } catch (error) {
-  //     setError('Error resetting status');
-  //     console.error('Error resetting status:', error);
-  //     setIsDetected(false); // 에러 발생 시 상태를 false로 설정
-  //   }
-  // };
+  // reset_status API 호출하는 함수
+  const handleStopUpdates = async () => {
+    try {
+      const response = await axios.post('http://172.20.10.2:5000/reset_status'); // Flask 서버 IP로 변경하세요.
+      if (response.data.status === false) {
+        setIsDetected(false); // status가 false로 변경되면 isDetected를 false로 설정
+        console.log('Status reset:', response.data.status);
+      }
+    } catch (error) {
+      setError('Error resetting status');
+      console.error('Error resetting status:', error);
+      setIsDetected(false); // 에러 발생 시 상태를 false로 설정
+    }
+  };
 
   return (
     <View
@@ -143,16 +158,78 @@ const Header = (props) => {
                     onPressModalClose();
                   }}
                 >
-                  <Text style={styles.modalTextStyle}>
-                    {message[index]} {date[index]}
-                  </Text>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                    }}
+                  >
+                    <View style={{ flexDirection: 'column', alignItems: 'center' }}>
+                      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        <Text style={{ fontSize: 20, fontWeight: 'bold', marginRight: 5 }}>상추</Text>
+                        <Text style={{ fontSize: 6, marginRight: 5, marginTop: 5 }}> ● </Text>
+                        <Text style={{ fontSize: 15, marginTop: 5 }}>{date[index]}</Text>
+                      </View>
+                      <Text style={{ marginRight: 17, marginTop: 3, fontSize: 15 }}>{message[index]}</Text>
+                    </View>
+                    <View>
+                      <AntDesign
+                        name="arrowright"
+                        size={25}
+                        color="lightgray"
+                        style={{ marginTop: 30, marginLeft: 90, marginBottom: 30 }}
+                      />
+                    </View>
+                  </View>
                 </Pressable>
               </View>
             ))}
-
+            <View style={styles.modalView}>
+              <Pressable
+                onPress={() => {
+                  goToMonitor();
+                  onPressModalClose();
+                }}
+              >
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                  }}
+                >
+                  <View
+                    style={{
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      marginRight: 10,
+                    }}
+                  >
+                    <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 40 }}>
+                      <Text style={{ fontSize: 20, fontWeight: 'bold', marginRight: 5 }}>상추</Text>
+                      <Text style={{ fontSize: 6, marginRight: 5, marginTop: 5 }}> ● </Text>
+                      <Text style={{ fontSize: 15, marginTop: 5 }}>2024.10.28 PM 09:34</Text>
+                    </View>
+                    <Text style={{ marginTop: 3, fontSize: 15, marginRight: 15 }}>
+                      온도가 적정 수준으로 조절되었습니다.
+                    </Text>
+                  </View>
+                  <View style={{ marginLeft: 40 }}>
+                    <AntDesign
+                      name="arrowright"
+                      size={25}
+                      color="lightgray"
+                      style={{ marginTop: 30, marginBottom: 30 }}
+                    />
+                  </View>
+                </View>
+              </Pressable>
+            </View>
             <Pressable style={{ alignItems: 'center', marginTop: 10 }} onPress={onPressModalClose}>
               <AntDesign name="closecircle" size={24} color="#269B00" />
             </Pressable>
+            <Margin height={30} />
           </ScrollView>
         </Modal>
       </View>
@@ -177,18 +254,13 @@ const styles = StyleSheet.create({
     margin: 10,
     backgroundColor: 'white',
     borderRadius: 20,
-    padding: 30,
+    padding: 10,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
-  },
-  modalTextStyle: {
-    color: '#17191c',
-    fontWeight: 'bold',
-    textAlign: 'center',
   },
   centeredView: {
     flex: 1,

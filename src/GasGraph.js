@@ -37,7 +37,7 @@ const GasGraph = ({ userDate }) => {
       });
 
       if (response.data && response.data.data) {
-        setSensorData(response.data.data.slice(1, 24));
+        setSensorData(response.data.data.slice(1, 25));
       }
     } catch (err) {
       console.error('Error fetching sensor data:', err);

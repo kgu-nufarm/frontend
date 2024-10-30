@@ -12,12 +12,11 @@ const SensorTable = () => {
   // useEffect(() => {
   //   const fetchData = async () => {
   //     try {
-  //       const response = await axios.get('http://192.168.137.96:5000/sensor'); // 라즈베리파이의 IP 및 엔드포인트에 맞게 수정
+  //       const response = await axios.get('http://192.168.137.157:5000/sensor'); // 라즈베리파이의 IP 및 엔드포인트에 맞게 수정
   //       const data = response.data;
-  //       setTemp(data.temp);
+  //       setTemp(data.temperature);
   //       setHumidity(data.humidity);
   //       setIlluminance(data.illuminance);
-  //       setSoilMoisture(data.soil_moisture);
   //       setCo2(data.co2);
   //     } catch (error) {
   //       console.error('Error fetching data:', error);
@@ -26,7 +25,7 @@ const SensorTable = () => {
 
   //   fetchData(); // 초기 데이터 로드
 
-  //   const intervalId = setInterval(fetchData, 200); // 0.2초마다 데이터 갱신
+  //   const intervalId = setInterval(fetchData, 1000); // 0.2초마다 데이터 갱신
 
   //   return () => clearInterval(intervalId); // 컴포넌트 언마운트 시 interval 정리
   // }, []);
@@ -37,7 +36,7 @@ const SensorTable = () => {
           <Text style={styles.label}>온도</Text>
         </View>
         <View style={styles.numWrapper}>
-          <Text style={styles.num_label}>19°C</Text>
+          <Text style={styles.num_label}>{temp}°C</Text>
         </View>
       </View>
       <View style={styles.box_style}>
@@ -45,7 +44,7 @@ const SensorTable = () => {
           <Text style={styles.label}>습도</Text>
         </View>
         <View style={styles.numWrapper}>
-          <Text style={styles.num_label}>86%</Text>
+          <Text style={styles.num_label}>{humidity}%</Text>
         </View>
       </View>
       <View style={styles.box_style}>
@@ -53,7 +52,7 @@ const SensorTable = () => {
           <Text style={styles.label}>조도</Text>
         </View>
         <View style={styles.numWrapper}>
-          <Text style={styles.num_label}>3023lx</Text>
+          <Text style={styles.num_label}>{illuminance}xl</Text>
         </View>
       </View>
       <View style={styles.box_style}>
@@ -61,7 +60,7 @@ const SensorTable = () => {
           <Text style={styles.label}>가스</Text>
         </View>
         <View style={styles.numWrapper}>
-          <Text style={styles.num_label}>32%</Text>
+          <Text style={styles.num_label}>{co2}ppm</Text>
         </View>
       </View>
     </View>

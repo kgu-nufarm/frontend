@@ -39,7 +39,7 @@ const IlluminanceGraph = ({ userDate }) => {
 
       if (response.data && response.data.data) {
         // 처음 10개 데이터만 설정
-        setSensorData(response.data.data.slice(1, 24));
+        setSensorData(response.data.data.slice(1, 25));
       }
     } catch (err) {
       console.error('Error fetching sensor data:', err);
